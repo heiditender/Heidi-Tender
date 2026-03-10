@@ -1,0 +1,1256 @@
+{
+  "tender_products": [
+    {
+      "product_key": "typ_07",
+      "product_name": "Solo Slim",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchte Typ 07 ... Hersteller: Regent Lighting ... Name: Solo Slim ... Artikelnummer: 1022.5481 ... Systemleistung: 15 W ... Leuchtenlichtstrom: 2150 lm ... Entblendungswert (UGR): 22 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1022.5481",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Artikelnummer: 1022.5481"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "DxT = 428x100mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Abmessungen: DxT = 428x100mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 15,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Systemleistung: 15 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 2150,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchtenlichtstrom: 2150 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 22,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Entblendungswert (UGR): 22"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_08",
+      "product_name": "Solo Slim",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchte Typ 08 ... Hersteller: Regent Lighting ... Name: Solo Slim ... Artikelnummer: 1022.5483 ... Systemleistung: 14 W ... Leuchtenlichtstrom: 2200 lm ... Entblendungswert (UGR): 21 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1022.5483",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Artikelnummer: 1022.5483"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "DxT = 528x100mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Abmessungen: DxT = 528x100mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 14,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Systemleistung: 14 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 2200,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchtenlichtstrom: 2200 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 21,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Entblendungswert (UGR): 21"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Lebensdauer: 50'000h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_09",
+      "product_name": "Solo Slim",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchte Typ 09 ... Hersteller: Regent Lighting ... Name: Solo Slim ... Artikelnummer: 1022.549 ... Systemleistung: 26 W ... Leuchtenlichtstrom: 3850 lm ... Entblendungswert (UGR): 21 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1022.549",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Artikelnummer: 1022.549"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "DxT = 680x100mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Abmessungen: DxT = 680x100mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 26,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Systemleistung: 26 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 3850,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchtenlichtstrom: 3850 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 21,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Entblendungswert (UGR): 21"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_10",
+      "product_name": "Flow",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchte Typ 10 ... Hersteller: Regent Lighting ... Name: Flow ... Artikelnummer: 2007.1401 ... Montageart: AP ... Abmessungen: LxBxH = 605x54x80mm ... Systemleistung: 8 W ... Leuchtenlichtstrom: 780 lm ... Entblendungswert (UGR): 20 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 44 / IK 07"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2007.1401",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Artikelnummer: 2007.1401"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "LxBxH = 605x54x80mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Abmessungen: LxBxH = 605x54x80mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 8,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Systemleistung: 8 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 780,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchtenlichtstrom: 780 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 20,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Entblendungswert (UGR): 20"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 75000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Lebensdauer: 75'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 44",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 44 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 44 / IK 07"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_11",
+      "product_name": "Arny 2",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchte Typ 11 ... Hersteller: Regent Lighting ... Name: Arny 2 ... Artikelnummer: 2008.3853 ... Montageart: AP ... Abmessungen: LxBxH = 365x365x63mm ... Systemleistung: 100 W ... Leuchtenlichtstrom: 16000 lm ... Entblendungswert (UGR): 24.2 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 66 / IK 10 ... Umgebungstemperatur: -20 bis +55C° ... Lebensdauer: 100'000 h"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2008.3853",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Artikelnummer: 2008.3853"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "LxBxH = 365x365x63mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Abmessungen: LxBxH = 365x365x63mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 100,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Systemleistung: 100 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 16000,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchtenlichtstrom: 16000 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 24.2,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Entblendungswert (UGR): 24.2"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 100000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Lebensdauer: 100'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 10",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ambient_temperature_range",
+          "operator": "eq",
+          "value": "-20 bis +55 C°",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Umgebungstemperatur: -20 bis +55C°"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_15",
+      "product_name": "Splash",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchte Typ 15 ... Hersteller: Regent Lighting ... Name: Splash ... Artikelnummer: 2008.9108 ... Montageart: AP ... Abmessungen: LxBxH = 1272x95x100mm ... Systemleistung: 33 W ... Leuchtenlichtstrom: 4850 lm ... Entblendungswert (UGR): 25 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 66 / IK 10 ... Lebensdauer: 63'000 h"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2008.9108",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Artikelnummer: 2008.9108"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "LxBxH = 1272x95x100mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Abmessungen: LxBxH = 1272x95x100mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 33,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Systemleistung: 33 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 4850,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Leuchtenlichtstrom: 4850 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 25,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Entblendungswert (UGR): 25"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 63000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Lebensdauer: 63'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 10",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_04",
+      "product_name": "CHANNEL S",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchte Typ 04 ... Hersteller: Regent Lighting ... Name: CHANNEL S ... Artikelnummer: Diverse ... Montageart: AP ... Abmessungen: LxBxH = Diversex65x60mm ... Leuchtenlichtstrom: 1060 lm pro 1,2 m ... Entblendungswert (UGR): <19 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "in",
+          "value": "Diverse",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Artikelnummer: Diverse"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "LxBxH = Diversex65x60mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Abmessungen: LxBxH = Diversex65x60mm"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "contains",
+          "value": "1060 lm pro 1,2 m",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchtenlichtstrom: 1060 lm pro 1,2 m"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "lt",
+          "value": 19,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Entblendungswert (UGR): <19"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40"
+          }
+        },
+        {
+          "field": "notes",
+          "operator": "contains",
+          "value": "Preis pro m, inkl. Profil, Einspeiser, LED Einsatz, Endstücke, Profilverbinder, Wandhalterset, Diffusor",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Preis pro m, inkl. Profil, Einspeiser, LED Einsatz, Endstücke, Profilverbinder, Wandhalterset, Diffusor."
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_05",
+      "product_name": "ExeLED",
+      "quantity": null,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchte Typ 05 ... Hersteller: Regent Lighting ... Name: ExeLED ... Artikelnummer: 2010.3169 ... Montageart: AP ... Abmessungen: LxBxH = 1250x182x114mm ... Systemleistung: 28 W ... Leuchtenlichtstrom: 4590 lm ... Farbtemperatur: 6500 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 66 / IK 10 ... Umgebungstemperatur: -30°C bis +55°C ... Lebensdauer: 80'000 h ... Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2010.3169",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Artikelnummer: 2010.3169"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions",
+          "operator": "eq",
+          "value": "LxBxH = 1250x182x114mm",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Abmessungen: LxBxH = 1250x182x114mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 28,
+          "unit": "W",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Systemleistung: 28 W"
+          }
+        },
+        {
+          "field": "lumen",
+          "operator": "eq",
+          "value": 4590,
+          "unit": "lm",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Leuchtenlichtstrom: 4590 lm"
+          }
+        },
+        {
+          "field": "cct",
+          "operator": "eq",
+          "value": 6500,
+          "unit": "K",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbtemperatur: 6500 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "gt",
+          "value": 80,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "lifetime_h",
+          "operator": "eq",
+          "value": 80000,
+          "unit": "h",
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Lebensdauer: 80'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "ON/OFF",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 10",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ambient_temperature_range",
+          "operator": "eq",
+          "value": "-30°C bis +55°C",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "snippet": "Umgebungstemperatur: -30°C bis +55°C"
+          }
+        }
+      ]
+    }
+  ],
+  "uncertainties": [
+    "Quantities for all products are not specified in the tender documents (no Stück/Menge found) — quantity set to null for each product.",
+    "CHANNEL S luminous flux is given as '1060 lm pro 1,2 m' (per 1.2 m). The tender does not state lumen per meter explicitly or the exact lengths required; conversion or exact per-meter requirement is unclear.",
+    "Some entries list 'Artikelnummer: Diverse' (CHANNEL S) — exact article numbers / variants to supply are not specified.",
+    "Several product entries in the tender include placeholders for 'Unternehmervorschlag' (manufacturer/name/article number blank) — if bidder proposes alternatives, acceptance criteria are not detailed in the document snippets examined.",
+    "For some products the tender shows 'Frühausfälle: -' or 'Spezielles: -' (no information) — failure rates and special requirements are unspecified.",
+    "No explicit required quantities, delivery dates, or packaging/installation scope found in the provided snippets; scope boundaries (supply only vs. supply+install) are not specified in the extracted lines."
+  ]
+}
