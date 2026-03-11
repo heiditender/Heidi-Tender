@@ -22,7 +22,7 @@
   - operator: eq/gte/lte/gt/lt/between/in/contains/bool_true/bool_false
   - value: 数值或字符串
   - unit: 单位（可为 null）
-  - is_hard: true 表示必须满足
+  - is_hard: true 表示必须满足（按“硬/软约束判定规则”输出）
   - source: {file_name, snippet}
 
 2) uncertainties: 无法确定或缺失的信息列表
@@ -31,5 +31,13 @@
 - 只使用投标包文件中的信息，不引入外部知识。
 - 如果同一产品在多个表/页出现，合并需求参数。
 - 如果无法确定产品数量或名称，至少输出 1 个产品，并在 uncertainties 说明。
+
+硬/软约束判定规则（直接体现在 is_hard 字段）
+1) 若文本明确出现 MUST/SHALL/必需/必须/不可少/obligatorisch/zwingend/MUSS/KO/Mindestanforderung 等强制措辞 → is_hard=true
+2) 若文本出现 should/建议/推荐/idealerweise/soll 等偏好措辞 → is_hard=false
+3) 若无明确措辞，则按字段语义推断（只对数值字段）：
+   - 硬约束（is_hard=true）：ip_rating, ik_rating, ugr, cri, ambient_temp_range, min_temp_c, max_temp_c
+   - 软约束（is_hard=false）：power_w, lumen, cct, sdcm, life_hours, dimensions
+4) 若无法判断，一律设为 is_hard=false
 
 保证 JSON 语法正确。

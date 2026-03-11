@@ -1,513 +1,41 @@
 {
   "tender_products": [
     {
-      "product_key": "typ_07",
-      "product_name": "Solo Slim",
-      "quantity": null,
+      "product_key": "typ_01",
+      "product_name": "Einzellichtleiste",
+      "quantity": 135,
       "requirements": [
         {
           "field": "manufacturer",
           "operator": "eq",
           "value": "Regent Lighting",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchte Typ 07 ... Hersteller: Regent Lighting ... Name: Solo Slim ... Artikelnummer: 1022.5481 ... Systemleistung: 15 W ... Leuchtenlichtstrom: 2150 lm ... Entblendungswert (UGR): 22 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+            "file_name": "Typ 01",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Board Essential",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Name: Board Essential"
           }
         },
         {
           "field": "article_number",
           "operator": "eq",
-          "value": "1022.5481",
+          "value": "2011.1813",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Artikelnummer: 1022.5481"
-          }
-        },
-        {
-          "field": "mounting",
-          "operator": "eq",
-          "value": "Einbau",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Montageart: Einbau"
-          }
-        },
-        {
-          "field": "dimensions",
-          "operator": "eq",
-          "value": "DxT = 428x100mm",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Abmessungen: DxT = 428x100mm"
-          }
-        },
-        {
-          "field": "power_w",
-          "operator": "eq",
-          "value": 15,
-          "unit": "W",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Systemleistung: 15 W"
-          }
-        },
-        {
-          "field": "lumen",
-          "operator": "eq",
-          "value": 2150,
-          "unit": "lm",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchtenlichtstrom: 2150 lm"
-          }
-        },
-        {
-          "field": "ugr",
-          "operator": "eq",
-          "value": 22,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Entblendungswert (UGR): 22"
-          }
-        },
-        {
-          "field": "cct",
-          "operator": "eq",
-          "value": 4000,
-          "unit": "K",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbtemperatur: 4000 K"
-          }
-        },
-        {
-          "field": "cri",
-          "operator": "gt",
-          "value": 80,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
-          }
-        },
-        {
-          "field": "sdcm",
-          "operator": "eq",
-          "value": 3,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbkonsistenz (SDCM): 3"
-          }
-        },
-        {
-          "field": "lifetime_h",
-          "operator": "eq",
-          "value": 50000,
-          "unit": "h",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Lebensdauer: 50'000 h"
-          }
-        },
-        {
-          "field": "control",
-          "operator": "eq",
-          "value": "DALI",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Steuerung: DALI"
-          }
-        },
-        {
-          "field": "ip_rating",
-          "operator": "eq",
-          "value": "IP 40",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        },
-        {
-          "field": "ik_rating",
-          "operator": "eq",
-          "value": "IK 07",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        }
-      ]
-    },
-    {
-      "product_key": "typ_08",
-      "product_name": "Solo Slim",
-      "quantity": null,
-      "requirements": [
-        {
-          "field": "manufacturer",
-          "operator": "eq",
-          "value": "Regent Lighting",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchte Typ 08 ... Hersteller: Regent Lighting ... Name: Solo Slim ... Artikelnummer: 1022.5483 ... Systemleistung: 14 W ... Leuchtenlichtstrom: 2200 lm ... Entblendungswert (UGR): 21 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        },
-        {
-          "field": "article_number",
-          "operator": "eq",
-          "value": "1022.5483",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Artikelnummer: 1022.5483"
-          }
-        },
-        {
-          "field": "mounting",
-          "operator": "eq",
-          "value": "Einbau",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Montageart: Einbau"
-          }
-        },
-        {
-          "field": "dimensions",
-          "operator": "eq",
-          "value": "DxT = 528x100mm",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Abmessungen: DxT = 528x100mm"
-          }
-        },
-        {
-          "field": "power_w",
-          "operator": "eq",
-          "value": 14,
-          "unit": "W",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Systemleistung: 14 W"
-          }
-        },
-        {
-          "field": "lumen",
-          "operator": "eq",
-          "value": 2200,
-          "unit": "lm",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Leuchtenlichtstrom: 2200 lm"
-          }
-        },
-        {
-          "field": "ugr",
-          "operator": "eq",
-          "value": 21,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Entblendungswert (UGR): 21"
-          }
-        },
-        {
-          "field": "cct",
-          "operator": "eq",
-          "value": 4000,
-          "unit": "K",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Farbtemperatur: 4000 K"
-          }
-        },
-        {
-          "field": "cri",
-          "operator": "gt",
-          "value": 80,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
-          }
-        },
-        {
-          "field": "sdcm",
-          "operator": "eq",
-          "value": 3,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Farbkonsistenz (SDCM): 3"
-          }
-        },
-        {
-          "field": "lifetime_h",
-          "operator": "eq",
-          "value": 50000,
-          "unit": "h",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Lebensdauer: 50'000h"
-          }
-        },
-        {
-          "field": "control",
-          "operator": "eq",
-          "value": "DALI",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Steuerung: DALI"
-          }
-        },
-        {
-          "field": "ip_rating",
-          "operator": "eq",
-          "value": "IP 40",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        },
-        {
-          "field": "ik_rating",
-          "operator": "eq",
-          "value": "IK 07",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        }
-      ]
-    },
-    {
-      "product_key": "typ_09",
-      "product_name": "Solo Slim",
-      "quantity": null,
-      "requirements": [
-        {
-          "field": "manufacturer",
-          "operator": "eq",
-          "value": "Regent Lighting",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchte Typ 09 ... Hersteller: Regent Lighting ... Name: Solo Slim ... Artikelnummer: 1022.549 ... Systemleistung: 26 W ... Leuchtenlichtstrom: 3850 lm ... Entblendungswert (UGR): 21 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        },
-        {
-          "field": "article_number",
-          "operator": "eq",
-          "value": "1022.549",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Artikelnummer: 1022.549"
-          }
-        },
-        {
-          "field": "mounting",
-          "operator": "eq",
-          "value": "Einbau",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Montageart: Einbau"
-          }
-        },
-        {
-          "field": "dimensions",
-          "operator": "eq",
-          "value": "DxT = 680x100mm",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Abmessungen: DxT = 680x100mm"
-          }
-        },
-        {
-          "field": "power_w",
-          "operator": "eq",
-          "value": 26,
-          "unit": "W",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Systemleistung: 26 W"
-          }
-        },
-        {
-          "field": "lumen",
-          "operator": "eq",
-          "value": 3850,
-          "unit": "lm",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchtenlichtstrom: 3850 lm"
-          }
-        },
-        {
-          "field": "ugr",
-          "operator": "eq",
-          "value": 21,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Entblendungswert (UGR): 21"
-          }
-        },
-        {
-          "field": "cct",
-          "operator": "eq",
-          "value": 4000,
-          "unit": "K",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbtemperatur: 4000 K"
-          }
-        },
-        {
-          "field": "cri",
-          "operator": "gt",
-          "value": 80,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
-          }
-        },
-        {
-          "field": "sdcm",
-          "operator": "eq",
-          "value": 3,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbkonsistenz (SDCM): 3"
-          }
-        },
-        {
-          "field": "lifetime_h",
-          "operator": "eq",
-          "value": 50000,
-          "unit": "h",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Lebensdauer: 50'000 h"
-          }
-        },
-        {
-          "field": "control",
-          "operator": "eq",
-          "value": "DALI",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Steuerung: DALI"
-          }
-        },
-        {
-          "field": "ip_rating",
-          "operator": "eq",
-          "value": "IP 40",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        },
-        {
-          "field": "ik_rating",
-          "operator": "eq",
-          "value": "IK 07",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
-          }
-        }
-      ]
-    },
-    {
-      "product_key": "typ_10",
-      "product_name": "Flow",
-      "quantity": null,
-      "requirements": [
-        {
-          "field": "manufacturer",
-          "operator": "eq",
-          "value": "Regent Lighting",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchte Typ 10 ... Hersteller: Regent Lighting ... Name: Flow ... Artikelnummer: 2007.1401 ... Montageart: AP ... Abmessungen: LxBxH = 605x54x80mm ... Systemleistung: 8 W ... Leuchtenlichtstrom: 780 lm ... Entblendungswert (UGR): 20 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 44 / IK 07"
-          }
-        },
-        {
-          "field": "article_number",
-          "operator": "eq",
-          "value": "2007.1401",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Artikelnummer: 2007.1401"
+            "file_name": "Typ 01",
+            "snippet": "Artikelnummer: 2011.1813"
           }
         },
         {
@@ -515,376 +43,54 @@
           "operator": "eq",
           "value": "AP",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "file_name": "Typ 01",
             "snippet": "Montageart: AP"
           }
         },
         {
-          "field": "dimensions",
+          "field": "dimensions_mm",
           "operator": "eq",
-          "value": "LxBxH = 605x54x80mm",
-          "unit": null,
-          "is_hard": true,
+          "value": "1200x55x59",
+          "unit": "mm",
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Abmessungen: LxBxH = 605x54x80mm"
+            "file_name": "Typ 01",
+            "snippet": "Abmessungen: LxBxH = 1200x55x59mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Stahlblech / weiss",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Material / Farbe: Stahlblech / weiss"
           }
         },
         {
           "field": "power_w",
           "operator": "eq",
-          "value": 8,
+          "value": 40,
           "unit": "W",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Systemleistung: 8 W"
+            "file_name": "Typ 01",
+            "snippet": "Systemleistung: 40 W"
           }
         },
         {
-          "field": "lumen",
+          "field": "lumen_lm",
           "operator": "eq",
-          "value": 780,
+          "value": 5600,
           "unit": "lm",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchtenlichtstrom: 780 lm"
-          }
-        },
-        {
-          "field": "ugr",
-          "operator": "eq",
-          "value": 20,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Entblendungswert (UGR): 20"
-          }
-        },
-        {
-          "field": "cct",
-          "operator": "eq",
-          "value": 4000,
-          "unit": "K",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbtemperatur: 4000 K"
-          }
-        },
-        {
-          "field": "cri",
-          "operator": "gt",
-          "value": 80,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
-          }
-        },
-        {
-          "field": "sdcm",
-          "operator": "eq",
-          "value": 3,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Farbkonsistenz (SDCM): 3"
-          }
-        },
-        {
-          "field": "lifetime_h",
-          "operator": "eq",
-          "value": 75000,
-          "unit": "h",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Lebensdauer: 75'000 h"
-          }
-        },
-        {
-          "field": "control",
-          "operator": "eq",
-          "value": "DALI",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Steuerung: DALI"
-          }
-        },
-        {
-          "field": "ip_rating",
-          "operator": "eq",
-          "value": "IP 44",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 44 / IK 07"
-          }
-        },
-        {
-          "field": "ik_rating",
-          "operator": "eq",
-          "value": "IK 07",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 44 / IK 07"
-          }
-        }
-      ]
-    },
-    {
-      "product_key": "typ_11",
-      "product_name": "Arny 2",
-      "quantity": null,
-      "requirements": [
-        {
-          "field": "manufacturer",
-          "operator": "eq",
-          "value": "Regent Lighting",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Leuchte Typ 11 ... Hersteller: Regent Lighting ... Name: Arny 2 ... Artikelnummer: 2008.3853 ... Montageart: AP ... Abmessungen: LxBxH = 365x365x63mm ... Systemleistung: 100 W ... Leuchtenlichtstrom: 16000 lm ... Entblendungswert (UGR): 24.2 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 66 / IK 10 ... Umgebungstemperatur: -20 bis +55C° ... Lebensdauer: 100'000 h"
-          }
-        },
-        {
-          "field": "article_number",
-          "operator": "eq",
-          "value": "2008.3853",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Artikelnummer: 2008.3853"
-          }
-        },
-        {
-          "field": "mounting",
-          "operator": "eq",
-          "value": "AP",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Montageart: AP"
-          }
-        },
-        {
-          "field": "dimensions",
-          "operator": "eq",
-          "value": "LxBxH = 365x365x63mm",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Abmessungen: LxBxH = 365x365x63mm"
-          }
-        },
-        {
-          "field": "power_w",
-          "operator": "eq",
-          "value": 100,
-          "unit": "W",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Systemleistung: 100 W"
-          }
-        },
-        {
-          "field": "lumen",
-          "operator": "eq",
-          "value": 16000,
-          "unit": "lm",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Leuchtenlichtstrom: 16000 lm"
-          }
-        },
-        {
-          "field": "ugr",
-          "operator": "eq",
-          "value": 24.2,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Entblendungswert (UGR): 24.2"
-          }
-        },
-        {
-          "field": "cct",
-          "operator": "eq",
-          "value": 4000,
-          "unit": "K",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Farbtemperatur: 4000 K"
-          }
-        },
-        {
-          "field": "cri",
-          "operator": "gt",
-          "value": 80,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
-          }
-        },
-        {
-          "field": "sdcm",
-          "operator": "eq",
-          "value": 3,
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Farbkonsistenz (SDCM): 3"
-          }
-        },
-        {
-          "field": "lifetime_h",
-          "operator": "eq",
-          "value": 100000,
-          "unit": "h",
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Lebensdauer: 100'000 h"
-          }
-        },
-        {
-          "field": "control",
-          "operator": "eq",
-          "value": "DALI",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Steuerung: DALI"
-          }
-        },
-        {
-          "field": "ip_rating",
-          "operator": "eq",
-          "value": "IP 66",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
-          }
-        },
-        {
-          "field": "ik_rating",
-          "operator": "eq",
-          "value": "IK 10",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
-          }
-        },
-        {
-          "field": "ambient_temperature_range",
-          "operator": "eq",
-          "value": "-20 bis +55 C°",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Umgebungstemperatur: -20 bis +55C°"
-          }
-        }
-      ]
-    },
-    {
-      "product_key": "typ_15",
-      "product_name": "Splash",
-      "quantity": null,
-      "requirements": [
-        {
-          "field": "manufacturer",
-          "operator": "eq",
-          "value": "Regent Lighting",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchte Typ 15 ... Hersteller: Regent Lighting ... Name: Splash ... Artikelnummer: 2008.9108 ... Montageart: AP ... Abmessungen: LxBxH = 1272x95x100mm ... Systemleistung: 33 W ... Leuchtenlichtstrom: 4850 lm ... Entblendungswert (UGR): 25 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 66 / IK 10 ... Lebensdauer: 63'000 h"
-          }
-        },
-        {
-          "field": "article_number",
-          "operator": "eq",
-          "value": "2008.9108",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Artikelnummer: 2008.9108"
-          }
-        },
-        {
-          "field": "mounting",
-          "operator": "eq",
-          "value": "AP",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Montageart: AP"
-          }
-        },
-        {
-          "field": "dimensions",
-          "operator": "eq",
-          "value": "LxBxH = 1272x95x100mm",
-          "unit": null,
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Abmessungen: LxBxH = 1272x95x100mm"
-          }
-        },
-        {
-          "field": "power_w",
-          "operator": "eq",
-          "value": 33,
-          "unit": "W",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Systemleistung: 33 W"
-          }
-        },
-        {
-          "field": "lumen",
-          "operator": "eq",
-          "value": 4850,
-          "unit": "lm",
-          "is_hard": true,
-          "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Leuchtenlichtstrom: 4850 lm"
+            "file_name": "Typ 01",
+            "snippet": "Leuchtenlichtstrom: 5600 lm"
           }
         },
         {
@@ -894,41 +100,268 @@
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "file_name": "Typ 01",
             "snippet": "Entblendungswert (UGR): 25"
           }
         },
         {
-          "field": "cct",
+          "field": "cct_k",
           "operator": "eq",
           "value": 4000,
           "unit": "K",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "file_name": "Typ 01",
             "snippet": "Farbtemperatur: 4000 K"
           }
         },
         {
           "field": "cri",
-          "operator": "gt",
-          "value": 80,
+          "operator": "eq",
+          "value": "Ra > 80",
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "file_name": "Typ 01",
             "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
           }
         },
         {
-          "field": "lifetime_h",
+          "field": "sdcm",
           "operator": "eq",
-          "value": 63000,
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
           "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "ON/OFF",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 20",
+          "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Lebensdauer: 63'000 h"
+            "file_name": "Typ 01",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 20 / IK 08"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 08",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 20 / IK 08"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            -10,
+            35
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 01",
+            "snippet": "Umgebungstemperatur: -10°C bis +35°C"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_02",
+      "product_name": "Deckeneinbauleuchte",
+      "quantity": 18,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Channel S",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Name: Channel S"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2003.3682",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Artikelnummer: 2003.3682"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "1267x86x60",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Abmessungen: LxBxH = 1267x86x60mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Aluminium / weiss",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Material / Farbe: Aluminium / weiss"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 22.5,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Systemleistung: 22.5 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 2200,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Leuchtenlichtstrom: 2200 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 24,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Entblendungswert (UGR): 24"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Lebensdauer: 50'000 h"
           }
         },
         {
@@ -936,21 +369,237 @@
           "operator": "eq",
           "value": "DALI",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
+            "file_name": "Typ 02",
             "snippet": "Steuerung: DALI"
           }
         },
         {
           "field": "ip_rating",
           "operator": "eq",
-          "value": "IP 66",
+          "value": "IP 20",
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+            "file_name": "Typ 02",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 20 / IK 08"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 08",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 20 / IK 08"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            -5,
+            30
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 02",
+            "snippet": "Umgebungstemperatur: -5°C bis +30°C"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_03",
+      "product_name": "Antivandalen-Einbauleuchte",
+      "quantity": 18,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Phalanx Linear LED",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Name: Phalanx Linear LED"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1023.0049",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Artikelnummer: 1023.0049"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "1360x240x110",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Abmessungen: LxBxH = 1360x240x110mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Metall / anthrahzitgrau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Material / Farbe: Metall / anthrahzitgrau"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 39,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Systemleistung: 39 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 2300,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Leuchtenlichtstrom: 2300 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 19,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Entblendungswert (UGR): 19"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Farbtemperatur: 4000K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 100000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Lebensdauer: 100'000h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "ON/OFF",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 65",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 65 / IK 10"
           }
         },
         {
@@ -960,36 +609,80 @@
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "250828_SH_Bläuen_LV_Beleuchtung.xlsx",
-            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+            "file_name": "Typ 03",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 65 / IK 10"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            -40,
+            40
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 03",
+            "snippet": "Umgebungstemperatur: -40°C bis +40°C"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
           }
         }
       ]
     },
     {
       "product_key": "typ_04",
-      "product_name": "CHANNEL S",
-      "quantity": null,
+      "product_name": "LED Lichtband",
+      "quantity": 372,
       "requirements": [
         {
           "field": "manufacturer",
           "operator": "eq",
           "value": "Regent Lighting",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Leuchte Typ 04 ... Hersteller: Regent Lighting ... Name: CHANNEL S ... Artikelnummer: Diverse ... Montageart: AP ... Abmessungen: LxBxH = Diversex65x60mm ... Leuchtenlichtstrom: 1060 lm pro 1,2 m ... Entblendungswert (UGR): <19 ... Farbtemperatur: 4000 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 40"
+            "file_name": "Typ 04",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "CHANNEL S",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
+            "snippet": "Name: CHANNEL S"
           }
         },
         {
           "field": "article_number",
-          "operator": "in",
+          "operator": "eq",
           "value": "Diverse",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Artikelnummer: Diverse"
           }
         },
@@ -998,31 +691,53 @@
           "operator": "eq",
           "value": "AP",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Montageart: AP"
           }
         },
         {
-          "field": "dimensions",
+          "field": "dimensions_mm",
           "operator": "eq",
-          "value": "LxBxH = Diversex65x60mm",
-          "unit": null,
-          "is_hard": true,
+          "value": "Diversx65x60",
+          "unit": "mm",
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Abmessungen: LxBxH = Diversex65x60mm"
           }
         },
         {
-          "field": "lumen",
-          "operator": "contains",
-          "value": "1060 lm pro 1,2 m",
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Aluminium",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
+            "snippet": "Material / Farbe: Aluminium"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": "Divers W",
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
+            "snippet": "Systemleistung: Divers W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": "1060 lm per 1.2 m",
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
             "snippet": "Leuchtenlichtstrom: 1060 lm pro 1,2 m"
           }
         },
@@ -1033,30 +748,63 @@
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Entblendungswert (UGR): <19"
           }
         },
         {
-          "field": "cct",
+          "field": "cct_k",
           "operator": "eq",
           "value": 4000,
           "unit": "K",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Farbtemperatur: 4000 K"
           }
         },
         {
           "field": "cri",
-          "operator": "gt",
-          "value": 80,
+          "operator": "eq",
+          "value": "Ra > 80",
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": ".",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
+            "snippet": "Farbkonsistenz (SDCM): ."
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
+            "snippet": "Steuerung: DALI"
           }
         },
         {
@@ -1066,37 +814,78 @@
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 04",
             "snippet": "Schutzart / Schlagfestigkeit: IP 40"
           }
         },
         {
-          "field": "notes",
-          "operator": "contains",
-          "value": "Preis pro m, inkl. Profil, Einspeiser, LED Einsatz, Endstücke, Profilverbinder, Wandhalterset, Diffusor",
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": null,
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Preis pro m, inkl. Profil, Einspeiser, LED Einsatz, Endstücke, Profilverbinder, Wandhalterset, Diffusor."
+            "file_name": "Typ 04",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40"
+          }
+        },
+        {
+          "field": "special",
+          "operator": "contains",
+          "value": "Preis pro m, inkl. Profil, Einspeiser, LED Einsatz, Endstücke, Profilverbinder, Wandhalterset, Diffusor",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 04",
+            "snippet": "Spezielles: Preis pro m, inkl. Profil, Einspeiser, LED Einsatz, Endstücke, Profilverbinder, Wandhalterset, Diffusor."
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
           }
         }
       ]
     },
     {
       "product_key": "typ_05",
-      "product_name": "ExeLED",
-      "quantity": null,
+      "product_name": "Ex-geschützte Feuchtraum-Wannenleuchte",
+      "quantity": 2,
       "requirements": [
         {
           "field": "manufacturer",
           "operator": "eq",
           "value": "Regent Lighting",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Leuchte Typ 05 ... Hersteller: Regent Lighting ... Name: ExeLED ... Artikelnummer: 2010.3169 ... Montageart: AP ... Abmessungen: LxBxH = 1250x182x114mm ... Systemleistung: 28 W ... Leuchtenlichtstrom: 4590 lm ... Farbtemperatur: 6500 K ... Farbwiedergabeindex (CRI): Ra > 80 ... Schutzart / Schlagfestigkeit: IP 66 / IK 10 ... Umgebungstemperatur: -30°C bis +55°C ... Lebensdauer: 80'000 h ... Steuerung: ON/OFF"
+            "file_name": "Typ 05",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "ExeLED",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 05",
+            "snippet": "Name: ExeLED"
           }
         },
         {
@@ -1104,9 +893,9 @@
           "operator": "eq",
           "value": "2010.3169",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Artikelnummer: 2010.3169"
           }
         },
@@ -1115,21 +904,32 @@
           "operator": "eq",
           "value": "AP",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Montageart: AP"
           }
         },
         {
-          "field": "dimensions",
+          "field": "dimensions_mm",
           "operator": "eq",
-          "value": "LxBxH = 1250x182x114mm",
-          "unit": null,
-          "is_hard": true,
+          "value": "1250x182x114",
+          "unit": "mm",
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Abmessungen: LxBxH = 1250x182x114mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Polyester / hellgrau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 05",
+            "snippet": "Material / Farbe: Polyester / hellgrau"
           }
         },
         {
@@ -1137,42 +937,53 @@
           "operator": "eq",
           "value": 28,
           "unit": "W",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Systemleistung: 28 W"
           }
         },
         {
-          "field": "lumen",
+          "field": "lumen_lm",
           "operator": "eq",
           "value": 4590,
           "unit": "lm",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Leuchtenlichtstrom: 4590 lm"
           }
         },
         {
-          "field": "cct",
+          "field": "ugr",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 05",
+            "snippet": "Entblendungswert (UGR): ."
+          }
+        },
+        {
+          "field": "cct_k",
           "operator": "eq",
           "value": 6500,
           "unit": "K",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Farbtemperatur: 6500 K"
           }
         },
         {
           "field": "cri",
-          "operator": "gt",
-          "value": 80,
+          "operator": "eq",
+          "value": "Ra > 80",
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
           }
         },
@@ -1180,21 +991,21 @@
           "field": "sdcm",
           "operator": "eq",
           "value": 3,
-          "unit": null,
-          "is_hard": true,
+          "unit": "SDCM",
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Farbkonsistenz (SDCM): 3"
           }
         },
         {
-          "field": "lifetime_h",
+          "field": "life_hours",
           "operator": "eq",
           "value": 80000,
           "unit": "h",
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Lebensdauer: 80'000 h"
           }
         },
@@ -1203,9 +1014,9 @@
           "operator": "eq",
           "value": "ON/OFF",
           "unit": null,
-          "is_hard": true,
+          "is_hard": false,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Steuerung: ON/OFF"
           }
         },
@@ -1216,7 +1027,7 @@
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
           }
         },
@@ -1227,19 +1038,2813 @@
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
+            "file_name": "Typ 05",
             "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
           }
         },
         {
-          "field": "ambient_temperature_range",
-          "operator": "eq",
-          "value": "-30°C bis +55°C",
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            -30,
+            55
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 05",
+            "snippet": "Umgebungstemperatur: -30°C bis +55°C"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
           "unit": null,
           "is_hard": true,
           "source": {
-            "file_name": "Ausschreibung BKP 233 Beleuchtung.pdf",
-            "snippet": "Umgebungstemperatur: -30°C bis +55°C"
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_06",
+      "product_name": "Decken- und Wandanbauleuchte",
+      "quantity": 286,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Purelite Office",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Name: Purelite Office"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2005.2614",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Artikelnummer: 2005.2614"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "1531x90x35",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Abmessungen: LxBxH = 1531x90x35mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Aluminium / natur eloxiert",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Material / Farbe: Aluminium / natur eloxiert"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 27,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Systemleistung: 27 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 3900,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Leuchtenlichtstrom: 3900 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 19,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Entblendungswert (UGR): 19"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 75000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Lebensdauer: 75'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 20",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 20 / IK 8"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 08",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 20 / IK 8"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 06",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_07",
+      "product_name": "Deckeneinbauleuchte (Solo Slim 428x100)",
+      "quantity": 7,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Solo Slim",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Name: Solo Slim"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1022.5481",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Artikelnummer: 1022.5481"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "428x100",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Abmessungen: DxT = 428x100mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Metall / weiss",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Material / Farbe: Metall / weiss"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 15,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Systemleistung: 15 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 2150,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Leuchtenlichtstrom: 2150 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 22,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Entblendungswert (UGR): 22"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 07",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_08",
+      "product_name": "Deckeneinbauleuchte (Solo Slim 528x100)",
+      "quantity": 5,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Solo Slim",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Name: Solo Slim"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1022.5483",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Artikelnummer: 1022.5483"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "528x100",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Abmessungen: DxT = 528x100mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 14,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Systemleistung: 14 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 2200,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Leuchtenlichtstrom: 2200 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 21,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Entblendungswert (UGR): 21"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Lebensdauer: 50'000h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 08",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_09",
+      "product_name": "Deckeneinbauleuchte (Solo Slim 680x100)",
+      "quantity": 5,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Solo Slim",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Name: Solo Slim"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "1022.549",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Artikelnummer: 1022.549"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "680x100",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Abmessungen: DxT = 680x100mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 26,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Systemleistung: 26 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 3850,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Leuchtenlichtstrom: 3850 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 21,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Entblendungswert (UGR): 21"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 07"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 09",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_10",
+      "product_name": "Decken- und Wandanbauleuchte (Flow)",
+      "quantity": 15,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Flow",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Name: Flow"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2007.1401",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Artikelnummer: 2007.1401"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "605x54x80",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Abmessungen: LxBxH = 605x54x80mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Aluminium / eloxiert",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Material / Farbe: Aluminium / eloxiert"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 8,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Systemleistung: 8 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 780,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Leuchtenlichtstrom: 780 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 20,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Entblendungswert (UGR): 20"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 75000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Lebensdauer: 75'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 44",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 44 / IK 07"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 07",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 44 / IK 07"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 10",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_11",
+      "product_name": "Hallenleuchte (Arny 2)",
+      "quantity": 36,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Arny 2",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Name: Arny 2"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2008.3853",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Artikelnummer: 2008.3853"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "365x365x63",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Abmessungen: LxBxH = 365x365x63mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "Aluminium / weiss",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Material / Farbe: Aluminium / weiss"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 100,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Systemleistung: 100 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 16000,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Leuchtenlichtstrom: 16000 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 24.2,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Entblendungswert (UGR): 24.2"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 100000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Lebensdauer: 100'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 10",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            -20,
+            55
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 11",
+            "snippet": "Umgebungstemperatur: -20 bis +55C°"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_12",
+      "product_name": "Decken- und Wandanbauleuchte (Milano Slim 430x89)",
+      "quantity": 36,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Milano Slim",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Name: Milano Slim"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2004.2504",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Artikelnummer: 2004.2504"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "430x89",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Abmessungen: DxH = 430x89mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "weiss",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Material / Farbe: weiss"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 13,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Systemleistung: 13 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 1800,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Leuchtenlichtstrom: 1800 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 20,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Entblendungswert (UGR): 20"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 04"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 04",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 04"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 12",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_13",
+      "product_name": "Decken- und Wandanbauleuchte (Milano Slim 530x89)",
+      "quantity": 27,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Milano Slim",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Name: Milano Slim"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2004.2508",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Artikelnummer: 2004.2508"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "530x89",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Abmessungen: DxH = 530x89mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "weiss",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Material / Farbe: weiss"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 17,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Systemleistung: 17 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 2700,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Leuchtenlichtstrom: 2700 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 20,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Entblendungswert (UGR): 20"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 04"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 04",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 04"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 13",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_14",
+      "product_name": "Decken- und Wandanbauleuchte (Milano Slim 680x89)",
+      "quantity": 15,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Milano Slim",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Name: Milano Slim"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2004.2513",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Artikelnummer: 2004.2513"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "680x89",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Abmessungen: DxH = 680x89mm"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 35,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Systemleistung: 35 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 5600,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Leuchtenlichtstrom: 5600 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 21,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Entblendungswert (UGR): 21"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 50000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Lebensdauer: 50'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 40",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 04"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 04",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 40 / IK 04"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 14",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_15",
+      "product_name": "Feuchtraum-Wannenleuchte (Splash)",
+      "quantity": 45,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "Splash",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Name: Splash"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2008.9108",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Artikelnummer: 2008.9108"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "1272x95x100",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Abmessungen: LxBxH = 1272x95x100mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "grau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Material / Farbe: grau"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 33,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Systemleistung: 33 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 4850,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Leuchtenlichtstrom: 4850 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": 25,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Entblendungswert (UGR): 25"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 3,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Farbkonsistenz (SDCM): 3"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 63000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Lebensdauer: 63'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "DALI",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Steuerung: DALI"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 10",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 10"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 15",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_16",
+      "product_name": "Einbau-Downlight (LOBBY)",
+      "quantity": 20,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Regent Lighting",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Hersteller: Regent Lighting"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "LOBBY",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Name: LOBBY"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "2009.3438",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Artikelnummer: 2009.3438"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "Einbau",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Montageart: Einbau"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "140x110",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Abmessungen: DxH = 140x110mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "schwarz",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Material / Farbe: schwarz"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 8.6,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Systemleistung: 8.6 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 626,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Leuchtenlichtstrom: 626 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Entblendungswert (UGR):"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": "Ra > 80",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Farbwiedergabeindex (CRI): Ra > 80"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": 5,
+          "unit": "SDCM",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Farbkonsistenz (SDCM): 5"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": 70000,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Lebensdauer: 70'000 h"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "ON/OFF",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 65",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 65 / IK 10"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 10",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 65 / IK 10"
+          }
+        },
+        {
+          "field": "special",
+          "operator": "contains",
+          "value": "Inkl. Einbetoniergehäuse",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 16",
+            "snippet": "Spezielles: Inkl. Einbetoniergehäuse"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_17",
+      "product_name": "LED Scheinwerfer (Molto Luce 1 Module)",
+      "quantity": 4,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Molto Luce",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Hersteller: Molto Luce"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "2177 - Forum LED HE - 1 Module",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Name: 2177 - Forum LED HE - 1 Module"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "412698-00",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Artikelnummer: 412698-00"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "640x214x281",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Abmessungen: LxBxH = 640x214x281mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "grau / schwarz",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Material / Farbe: grau / schwarz"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 368,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Systemleistung: 368 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 55829,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Leuchtenlichtstrom: 55829 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Entblendungswert (UGR): -"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Farbwiedergabeindex (CRI): -"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Farbkonsistenz (SDCM): -"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": null,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Lebensdauer: -"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "ON/OFF",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 08"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 08",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 08"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 17",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
+          }
+        }
+      ]
+    },
+    {
+      "product_key": "typ_18",
+      "product_name": "LED Scheinwerfer (Molto Luce 2 Module)",
+      "quantity": 10,
+      "requirements": [
+        {
+          "field": "manufacturer",
+          "operator": "eq",
+          "value": "Molto Luce",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Hersteller: Molto Luce"
+          }
+        },
+        {
+          "field": "model_name",
+          "operator": "eq",
+          "value": "2200 - Forum 2.0 HE - 2 Module",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Name: 2200 - Forum 2.0 HE - 2 Module"
+          }
+        },
+        {
+          "field": "article_number",
+          "operator": "eq",
+          "value": "412699-00",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Artikelnummer: 412699-00"
+          }
+        },
+        {
+          "field": "mounting",
+          "operator": "eq",
+          "value": "AP",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Montageart: AP"
+          }
+        },
+        {
+          "field": "dimensions_mm",
+          "operator": "eq",
+          "value": "770x372x495",
+          "unit": "mm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Abmessungen: LxBxH = 770x372x495mm"
+          }
+        },
+        {
+          "field": "material_color",
+          "operator": "eq",
+          "value": "schwarz",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Material / Farbe: schwarz"
+          }
+        },
+        {
+          "field": "power_w",
+          "operator": "eq",
+          "value": 736,
+          "unit": "W",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Systemleistung: 736 W"
+          }
+        },
+        {
+          "field": "lumen_lm",
+          "operator": "eq",
+          "value": 111658,
+          "unit": "lm",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Leuchtenlichtstrom: 111658 lm"
+          }
+        },
+        {
+          "field": "ugr",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Entblendungswert (UGR): -"
+          }
+        },
+        {
+          "field": "cct_k",
+          "operator": "eq",
+          "value": 4000,
+          "unit": "K",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Farbtemperatur: 4000 K"
+          }
+        },
+        {
+          "field": "cri",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Farbwiedergabeindex (CRI): -"
+          }
+        },
+        {
+          "field": "sdcm",
+          "operator": "eq",
+          "value": null,
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Farbkonsistenz (SDCM): -"
+          }
+        },
+        {
+          "field": "life_hours",
+          "operator": "eq",
+          "value": null,
+          "unit": "h",
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Lebensdauer: -"
+          }
+        },
+        {
+          "field": "control",
+          "operator": "eq",
+          "value": "ON/OFF",
+          "unit": null,
+          "is_hard": false,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Steuerung: ON/OFF"
+          }
+        },
+        {
+          "field": "ip_rating",
+          "operator": "eq",
+          "value": "IP 66",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 08"
+          }
+        },
+        {
+          "field": "ik_rating",
+          "operator": "eq",
+          "value": "IK 08",
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Schutzart / Schlagfestigkeit: IP 66 / IK 08"
+          }
+        },
+        {
+          "field": "ambient_temp_range",
+          "operator": "between",
+          "value": [
+            null,
+            null
+          ],
+          "unit": "°C",
+          "is_hard": true,
+          "source": {
+            "file_name": "Typ 18",
+            "snippet": "Umgebungstemperatur: -"
+          }
+        },
+        {
+          "field": "standards",
+          "operator": "in",
+          "value": [
+            "EN 62471",
+            "EN 55015",
+            "EN 61547",
+            "EN 62493",
+            "IEEE 1789-2015",
+            "EN 60598-1",
+            "EN 62031"
+          ],
+          "unit": null,
+          "is_hard": true,
+          "source": {
+            "file_name": "Allg. Bedingungen",
+            "snippet": "Die anzubietenden Leuchten müssen nach den gültigen Richtlinien und Normen gebaut sein: EN 62471 ... EN 62031"
           }
         }
       ]
@@ -1247,169 +3852,174 @@
   ],
   "match_results": [
     {
-      "product_key": "typ_07",
+      "product_key": "typ_01",
       "candidates": [
         {
-          "db_product_id": null,
-          "db_product_name": null,
-          "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "sdcm",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating"
-          ],
-          "parameters": []
+          "db_product_id": "174",
+          "db_product_name": "LED-Moisture-proof luminaire 4000K 45W DALI symmetric extra wide reflector",
+          "passes_hard": true,
+          "matched_requirements": "UGR (21.6 <= 25), CRI (80 >= 80), IP/IK (ip_rating 31 >= IP20, ik_rating 9 >= IK08), ambient temperature (min_temp <= -10 and max_temp >= 35).",
+          "unmet_requirements": "Manufacturer (Performance In Lighting - Italy) != requested 'Regent Lighting'; model_name and article_number differ (article_number 2.305992 vs 2011.1813). Power is 45W in DB name (tender requests 40W) — tender power is non-hard.",
+          "parameters": [
+            {
+              "field": "article_number",
+              "value": "2.305992",
+              "unit": null,
+              "db_field": "article_number"
+            },
+            {
+              "field": "manufacturer_name",
+              "value": "Performance In Lighting - Italy",
+              "unit": null,
+              "db_field": "manufacturer_name"
+            },
+            {
+              "field": "product_name",
+              "value": "LED-Moisture-proof luminaire 4000K 45W DALI symmetric extra wide reflector",
+              "unit": null,
+              "db_field": "product_name"
+            },
+            {
+              "field": "ugr",
+              "value": "21.6",
+              "unit": null,
+              "db_field": "ugr"
+            },
+            {
+              "field": "cri",
+              "value": "80",
+              "unit": null,
+              "db_field": "cri"
+            },
+            {
+              "field": "ip_rating",
+              "value": "31",
+              "unit": null,
+              "db_field": "ip_rating"
+            },
+            {
+              "field": "ik_rating",
+              "value": "9",
+              "unit": null,
+              "db_field": "ik_rating"
+            },
+            {
+              "field": "min_temp_c",
+              "value": "-25",
+              "unit": "°C",
+              "db_field": "min_temp_c"
+            },
+            {
+              "field": "max_temp_c",
+              "value": "45",
+              "unit": "°C",
+              "db_field": "max_temp_c"
+            },
+            {
+              "field": "lumen_lm",
+              "value": "5215.00",
+              "unit": "lm",
+              "db_field": "lumen_output_max"
+            },
+            {
+              "field": "electrical_power_w",
+              "value": null,
+              "unit": "W",
+              "db_field": "electrical_power_w"
+            }
+          ]
         }
       ]
     },
     {
-      "product_key": "typ_08",
+      "product_key": "typ_02",
       "candidates": [
         {
-          "db_product_id": null,
-          "db_product_name": null,
-          "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "sdcm",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating"
-          ],
-          "parameters": []
+          "db_product_id": "167",
+          "db_product_name": "LED-Moisture-proof luminaire 4000K 25W DALI symmetric extra wide reflector",
+          "passes_hard": true,
+          "matched_requirements": "UGR (19.7 <= 24), CRI (80 >= 80), IP/IK (ip_rating 31 >= IP20, ik_rating 9 >= IK08), ambient temperature (min_temp -25 <= -5 and max_temp 45 >= 30).",
+          "unmet_requirements": "Manufacturer differs (Performance In Lighting - Italy vs requested Regent Lighting); article_number (2.305990 vs 2003.3682) and model_name differ. DB lumen 3002 lm vs requested 2200 lm; power indicated in DB name 25W (requested 22.5W) — tender power non-hard.",
+          "parameters": [
+            {
+              "field": "article_number",
+              "value": "2.305990",
+              "unit": null,
+              "db_field": "article_number"
+            },
+            {
+              "field": "manufacturer_name",
+              "value": "Performance In Lighting - Italy",
+              "unit": null,
+              "db_field": "manufacturer_name"
+            },
+            {
+              "field": "product_name",
+              "value": "LED-Moisture-proof luminaire 4000K 25W DALI symmetric extra wide reflector",
+              "unit": null,
+              "db_field": "product_name"
+            },
+            {
+              "field": "ugr",
+              "value": "19.7",
+              "unit": null,
+              "db_field": "ugr"
+            },
+            {
+              "field": "cri",
+              "value": "80",
+              "unit": null,
+              "db_field": "cri"
+            },
+            {
+              "field": "ip_rating",
+              "value": "31",
+              "unit": null,
+              "db_field": "ip_rating"
+            },
+            {
+              "field": "ik_rating",
+              "value": "9",
+              "unit": null,
+              "db_field": "ik_rating"
+            },
+            {
+              "field": "min_temp_c",
+              "value": "-25",
+              "unit": "°C",
+              "db_field": "min_temp_c"
+            },
+            {
+              "field": "max_temp_c",
+              "value": "45",
+              "unit": "°C",
+              "db_field": "max_temp_c"
+            },
+            {
+              "field": "lumen_lm",
+              "value": "3002.00",
+              "unit": "lm",
+              "db_field": "lumen_output_max"
+            },
+            {
+              "field": "electrical_power_w",
+              "value": null,
+              "unit": "W",
+              "db_field": "electrical_power_w"
+            }
+          ]
         }
       ]
     },
     {
-      "product_key": "typ_09",
+      "product_key": "typ_03",
       "candidates": [
         {
           "db_product_id": null,
           "db_product_name": null,
           "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "sdcm",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating"
-          ],
-          "parameters": []
-        }
-      ]
-    },
-    {
-      "product_key": "typ_10",
-      "candidates": [
-        {
-          "db_product_id": null,
-          "db_product_name": null,
-          "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "sdcm",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating"
-          ],
-          "parameters": []
-        }
-      ]
-    },
-    {
-      "product_key": "typ_11",
-      "candidates": [
-        {
-          "db_product_id": null,
-          "db_product_name": null,
-          "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "sdcm",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating",
-            "ambient_temperature_range"
-          ],
-          "parameters": []
-        }
-      ]
-    },
-    {
-      "product_key": "typ_15",
-      "candidates": [
-        {
-          "db_product_id": null,
-          "db_product_name": null,
-          "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating"
-          ],
+          "matched_requirements": "",
+          "unmet_requirements": "No candidate returned from DB for typ_03. Required hard constraints (UGR <=19, IP >=65, IK >=10, ambient -40..40) not matched by any current product in DB query results.",
           "parameters": []
         }
       ]
@@ -1421,19 +4031,8 @@
           "db_product_id": null,
           "db_product_name": null,
           "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "lumen",
-            "ugr",
-            "cct",
-            "cri",
-            "ip_rating",
-            "notes"
-          ],
+          "matched_requirements": "",
+          "unmet_requirements": "No candidate returned from DB for typ_04. Tender requires UGR <19 and IP >=40; DB query returned 0 rows. Also tender values for lumen/power are per length ('1060 lm per 1.2 m' and 'Divers W') — ambiguity prevents direct match.",
           "parameters": []
         }
       ]
@@ -1445,23 +4044,244 @@
           "db_product_id": null,
           "db_product_name": null,
           "passes_hard": false,
-          "matched_requirements": [],
-          "unmet_requirements": [
-            "manufacturer",
-            "article_number",
-            "mounting",
-            "dimensions",
-            "power_w",
-            "lumen",
-            "cct",
-            "cri",
-            "sdcm",
-            "lifetime_h",
-            "control",
-            "ip_rating",
-            "ik_rating",
-            "ambient_temperature_range"
-          ],
+          "matched_requirements": "",
+          "unmet_requirements": "No candidate returned from DB for typ_05. Required high protection (IP66 / IK10) and ambient range -30..+55 not present in returned rows.",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_06",
+      "candidates": [
+        {
+          "db_product_id": "139",
+          "db_product_name": "LED-Moisture-proof luminaire 4000K 33W static Emergency 3h symmetric extra wide reflector",
+          "passes_hard": true,
+          "matched_requirements": "UGR (18.7 <= 19), CRI (80 >= 80), IP/IK (ip_rating 32 >= IP20, ik_rating 8 >= IK08).",
+          "unmet_requirements": "Manufacturer differs (Performance In Lighting - Italy vs Regent Lighting); article_number (2.3103929 vs 2005.2614) and model differ. Tender ambient_temp_range is unspecified ('-') — DB gives min_temp 5 / max_temp 40 (cannot confirm full tender ambient due to missing tender bounds). Power in DB name 33W vs requested 27W (non-hard).",
+          "parameters": [
+            {
+              "field": "article_number",
+              "value": "2.3103929",
+              "unit": null,
+              "db_field": "article_number"
+            },
+            {
+              "field": "manufacturer_name",
+              "value": "Performance In Lighting - Italy",
+              "unit": null,
+              "db_field": "manufacturer_name"
+            },
+            {
+              "field": "product_name",
+              "value": "LED-Moisture-proof luminaire 4000K 33W static Emergency 3h symmetric extra wide reflector",
+              "unit": null,
+              "db_field": "product_name"
+            },
+            {
+              "field": "ugr",
+              "value": "18.7",
+              "unit": null,
+              "db_field": "ugr"
+            },
+            {
+              "field": "cri",
+              "value": "80",
+              "unit": null,
+              "db_field": "cri"
+            },
+            {
+              "field": "ip_rating",
+              "value": "32",
+              "unit": null,
+              "db_field": "ip_rating"
+            },
+            {
+              "field": "ik_rating",
+              "value": "8",
+              "unit": null,
+              "db_field": "ik_rating"
+            },
+            {
+              "field": "min_temp_c",
+              "value": "5",
+              "unit": "°C",
+              "db_field": "min_temp_c"
+            },
+            {
+              "field": "max_temp_c",
+              "value": "40",
+              "unit": "°C",
+              "db_field": "max_temp_c"
+            },
+            {
+              "field": "lumen_lm",
+              "value": "4100.00",
+              "unit": "lm",
+              "db_field": "lumen_output_max"
+            },
+            {
+              "field": "electrical_power_w",
+              "value": null,
+              "unit": "W",
+              "db_field": "electrical_power_w"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "product_key": "typ_07",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_07 with required hard constraints (UGR <=22, IP >=40, IK >=7).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_08",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_08 with required hard constraints (UGR <=21, IP >=40, IK >=7).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_09",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_09 with required hard constraints (UGR <=21, IP >=40, IK >=7).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_10",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_10 with required hard constraints (UGR <=20, IP >=44, IK >=7).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_11",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_11 (required IP66 / IK10, UGR <=24.2, ambient -20..55).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_12",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_12 with required hard constraints (UGR <=20, IP >=40, IK >=4).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_13",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_13 with required hard constraints (UGR <=20, IP >=40, IK >=4).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_14",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_14 with required hard constraints (UGR <=21, IP >=40, IK >=4).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_15",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_15 (required IP66 / IK10 and UGR <=25).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_16",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_16 with required hard constraints (CRI >=80, IP >=65, IK >=10).",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_17",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_17 (query required IP >=66 and IK >=8). Note: tender CRI/UGR fields for this typ are missing; DB entries that exist did not match the IP/IK filters in the query.",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "product_key": "typ_18",
+      "candidates": [
+        {
+          "db_product_id": null,
+          "db_product_name": null,
+          "passes_hard": false,
+          "matched_requirements": "",
+          "unmet_requirements": "No DB rows returned for typ_18 (query required IP >=66 and IK >=8).",
           "parameters": []
         }
       ]

@@ -1,14 +1,14 @@
-# suisse-tender-copilot
+# suisse-bid-match
 
-Minimal workflow to upload tender pack files to OpenAI Files API and run a single extraction request that returns JSON.
+Minimal workflow to upload tender pack files to OpenAI Files API and run a DSPy-driven extraction + SQL match.
 
 ## Setup
 
 ```bash
-cd suisse-tender-copilot
+cd suisse-bid-match
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r src/requirements.txt
 ```
 
 Set your API key:
@@ -26,12 +26,11 @@ Optional envs:
 ## Run
 
 ```bash
-./scripts/upload_and_extract.py /path/to/tender-pack \
-  --prompt prompts/initial_prompt.txt \
+python src/core/upload_and_extract.py /path/to/tender-pack \
   --output output.json
 ```
 
-The full OpenAI response is saved to `output.json`.
+The full OpenAI response is saved to `src/output.json` (or the path you pass via `--output`).
 
 ## Notes
 

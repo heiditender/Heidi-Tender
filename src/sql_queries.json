@@ -1,0 +1,76 @@
+{
+  "queries": [
+    {
+      "product_key": "typ_01",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 25 AND ms.cri >= 80 AND ms.ip_rating >= 20 AND ms.ik_rating >= 8 AND ms.min_temp_c <= -10 AND ms.max_temp_c >= 35;"
+    },
+    {
+      "product_key": "typ_02",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 24 AND ms.cri >= 80 AND ms.ip_rating >= 20 AND ms.ik_rating >= 8 AND ms.min_temp_c <= -5 AND ms.max_temp_c >= 30;"
+    },
+    {
+      "product_key": "typ_03",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 19 AND ms.cri >= 80 AND ms.ip_rating >= 65 AND ms.ik_rating >= 10 AND ms.min_temp_c <= -40 AND ms.max_temp_c >= 40;"
+    },
+    {
+      "product_key": "typ_04",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr < 19 AND ms.cri >= 80 AND ms.ip_rating >= 40;"
+    },
+    {
+      "product_key": "typ_05",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.cri >= 80 AND ms.ip_rating >= 66 AND ms.ik_rating >= 10 AND ms.min_temp_c <= -30 AND ms.max_temp_c >= 55;"
+    },
+    {
+      "product_key": "typ_06",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 19 AND ms.cri >= 80 AND ms.ip_rating >= 20 AND ms.ik_rating >= 8;"
+    },
+    {
+      "product_key": "typ_07",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 22 AND ms.cri >= 80 AND ms.ip_rating >= 40 AND ms.ik_rating >= 7;"
+    },
+    {
+      "product_key": "typ_08",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 21 AND ms.cri >= 80 AND ms.ip_rating >= 40 AND ms.ik_rating >= 7;"
+    },
+    {
+      "product_key": "typ_09",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 21 AND ms.cri >= 80 AND ms.ip_rating >= 40 AND ms.ik_rating >= 7;"
+    },
+    {
+      "product_key": "typ_10",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 20 AND ms.cri >= 80 AND ms.ip_rating >= 44 AND ms.ik_rating >= 7;"
+    },
+    {
+      "product_key": "typ_11",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 24.2 AND ms.cri >= 80 AND ms.ip_rating >= 66 AND ms.ik_rating >= 10 AND ms.min_temp_c <= -20 AND ms.max_temp_c >= 55;"
+    },
+    {
+      "product_key": "typ_12",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 20 AND ms.cri >= 80 AND ms.ip_rating >= 40 AND ms.ik_rating >= 4;"
+    },
+    {
+      "product_key": "typ_13",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 20 AND ms.cri >= 80 AND ms.ip_rating >= 40 AND ms.ik_rating >= 4;"
+    },
+    {
+      "product_key": "typ_14",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 21 AND ms.cri >= 80 AND ms.ip_rating >= 40 AND ms.ik_rating >= 4;"
+    },
+    {
+      "product_key": "typ_15",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ugr <= 25 AND ms.cri >= 80 AND ms.ip_rating >= 66 AND ms.ik_rating >= 10;"
+    },
+    {
+      "product_key": "typ_16",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.cri >= 80 AND ms.ip_rating >= 65 AND ms.ik_rating >= 10;"
+    },
+    {
+      "product_key": "typ_17",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ip_rating >= 66 AND ms.ik_rating >= 8;"
+    },
+    {
+      "product_key": "typ_18",
+      "sql": "SELECT mp.product_id, mp.article_number, mp.product_name, mp.manufacturer_name, ms.ugr, ms.cri, ms.ip_rating, ms.ik_rating, ms.min_temp_c, ms.max_temp_c, ms.electrical_power_w, ms.lumen_output_max, mc.icon_tags FROM match_products mp JOIN match_specs ms ON mp.product_id = ms.product_id LEFT JOIN match_certs mc ON mp.product_id = mc.product_id WHERE mp.is_current = 1 AND ms.ip_rating >= 66 AND ms.ik_rating >= 8;"
+    }
+  ]
+}
