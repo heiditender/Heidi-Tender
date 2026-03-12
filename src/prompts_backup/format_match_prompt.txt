@@ -34,6 +34,8 @@
 - 若某 product_key 的 rows 为空，则输出一个候选，passes_hard=false，并在 uncertainties 说明原因。
 - 若 rows 非空，从中选择最合适的 1 个候选产品（Top1）。
 - 只使用输入中的信息，不引入外部知识。
+- 严格以 requirements 中的 operator 与 is_hard 为准，不要重新推断数值方向或重判软硬约束。
+- passes_hard 仅根据 is_hard=true 的 requirements 判定；软约束仅用于解释与同等条件下排序。
 - matched_requirements / unmet_requirements 允许为简短文本摘要。
 
 保证 JSON 语法正确。
