@@ -27,6 +27,7 @@ from ..services.rules import (
     ensure_openai_key,
     fetch_schema_payload,
     generate_rules_with_llm,
+    sanitize_copilot_rule_payload,
     validate_rule_payload,
 )
 
@@ -118,7 +119,8 @@ def generate_rule_draft(
         model=model,
         user_prompt="",
     )
-    normalized_payload, report = validate_rule_payload(generated_payload, allowed_fields)
+    sanitized_payload, _ = sanitize_copilot_rule_payload(generated_payload)
+    normalized_payload, report = validate_rule_payload(sanitized_payload, allowed_fields)
 
     repo = RuleRepository(db)
     row = repo.create_version(
@@ -176,18 +178,17 @@ def generate_rule_preview_stream(
                 user_prompt=prompt,
                 on_stream_event=_on_stream_event,
             )
-            normalized_payload, report = validate_rule_payload(generated_payload, allowed_fields)
-            queue.put(
-                (
-                    "preview_payload",
-                    {
-                        "preview_payload": normalized_payload,
-                        "validation_report": report,
-                        "llm_execution_summary": execution_summary,
-                        "model": model,
-                    },
-                )
-            )
+            sanitized_payload, sanitization_warnings = sanitize_copilot_rule_payload(generated_payload)
+            normalized_payload, report = validate_rule_payload(sanitized_payload, allowed_fields)
+            preview_event = {
+                "preview_payload": normalized_payload,
+                "validation_report": report,
+                "llm_execution_summary": execution_summary,
+                "model": model,
+            }
+            if sanitization_warnings:
+                preview_event["sanitization_warnings"] = sanitization_warnings
+            queue.put(("preview_payload", preview_event))
             queue.put(("done", {"ok": True}))
         except HTTPException as exc:
             queue.put(("error", {"message": str(exc.detail)}))

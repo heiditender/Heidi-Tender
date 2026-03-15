@@ -45,6 +45,7 @@ class TestMatchingUnknownHandling(unittest.TestCase):
         self.assertEqual(candidates[0]["db_product_id"], 2)
         self.assertEqual(candidates[0]["soft_match_score"], 1.0)
         self.assertEqual(candidates[1]["db_product_id"], 1)
+        self.assertEqual(candidates[1]["soft_match_score"], 0.0)
         self.assertEqual(candidates[1]["unmet_soft_constraints"], [])
 
 

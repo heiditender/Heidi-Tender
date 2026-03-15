@@ -13,12 +13,13 @@ from ..core_bridge import ensure_core_import_path
 
 ensure_core_import_path()
 
-from pipeline.contracts import schema_column_set, validate_step3_data  # type: ignore  # noqa: E402
+from pipeline.contracts import FieldRule, schema_column_set, validate_step3_data  # type: ignore  # noqa: E402
 from pipeline.mysql_client import fetch_schema_metadata  # type: ignore  # noqa: E402
 from pipeline.openai_client import call_responses, extract_output_json  # type: ignore  # noqa: E402
 
 
 RULES_COPILOT_STEP_NAME = "rules_copilot_generate"
+STEP3_RULE_ALLOWED_KEYS = frozenset(FieldRule.model_fields.keys())
 
 
 def _utcnow() -> datetime:
@@ -135,6 +136,41 @@ def validate_rule_payload(payload: dict, allowed_fields: set[str]) -> tuple[dict
     return normalized, report
 
 
+def sanitize_copilot_rule_payload(payload: dict) -> tuple[dict, list[str]]:
+    if not isinstance(payload, dict):
+        return payload, []
+
+    raw_rules = payload.get("field_rules")
+    if not isinstance(raw_rules, list):
+        return payload, []
+
+    sanitized_payload = dict(payload)
+    sanitized_rules: list[Any] = []
+    removed_row_count = 0
+    removed_keys: set[str] = set()
+
+    for row in raw_rules:
+        if not isinstance(row, dict):
+            sanitized_rules.append(row)
+            continue
+        extra_keys = [key for key in row if key not in STEP3_RULE_ALLOWED_KEYS]
+        if extra_keys:
+            removed_row_count += 1
+            removed_keys.update(extra_keys)
+            sanitized_rules.append({key: value for key, value in row.items() if key in STEP3_RULE_ALLOWED_KEYS})
+            continue
+        sanitized_rules.append(dict(row))
+
+    sanitized_payload["field_rules"] = sanitized_rules
+    if not removed_keys:
+        return sanitized_payload, []
+
+    row_label = "row" if removed_row_count == 1 else "rows"
+    keys_text = ", ".join(sorted(removed_keys))
+    warning = f"Removed unsupported Copilot keys from {removed_row_count} {row_label}: {keys_text}."
+    return sanitized_payload, [warning]
+
+
 def _build_rule_generation_prompts(
     *,
     schema_payload: dict,
@@ -145,15 +181,32 @@ def _build_rule_generation_prompts(
     fields_json = json.dumps(sorted(allowed_fields), ensure_ascii=False)
     normalized_prompt = user_prompt.strip()
     if not normalized_prompt:
-        normalized_prompt = "Generate a practical first draft of rules with as few hard constraints as possible."
+        normalized_prompt = (
+            "Generate a practical first draft of reusable rules with conservative hard constraints "
+            "and short generic rationales."
+        )
 
     system_prompt = (
-        "You are a tender-field rule generation assistant. Generate field_rules only from the provided schema."
-        "Output strict JSON in this format: {\"field_rules\":[...]}."
-        "Each rule must include field/operator/is_hard/operator_confidence/hardness_confidence/rationale."
-        "operator must be one of: eq,gte,lte,gt,lt,between,in,contains."
-        "Fields must come from allowed_fields."
-        "Do not output bool_true/bool_false."
+        "You generate reusable tender field rules from schema metadata.\n"
+        "Goal: produce field_rules only from the provided schema.\n"
+        "Output strict JSON with exactly one top-level key named field_rules.\n"
+        "Each rule object must contain only these keys: "
+        "field, operator, is_hard, operator_confidence, hardness_confidence, rationale.\n"
+        "Generate policy rules, not document-specific extracted requirements.\n"
+        "Fields must come from allowed_fields.\n"
+        "operator must be one of: eq,gte,lte,gt,lt,between,in,contains.\n"
+        "Do not output bool_true/bool_false.\n"
+        "Do not output value, unit, source, snippet, notes, confidence, or any extra keys.\n"
+        "value belongs to Step2 extraction, not Step3 rule generation.\n"
+        "Rule-writing policy:\n"
+        "1) Be conservative with is_hard. Mark a field hard only when it is typically a fit, compliance, safety, compatibility, or other gating constraint in tender evaluation.\n"
+        "2) Prefer softer defaults for descriptive, catalog, or ranking-oriented fields.\n"
+        "3) Choose operators from general parameter semantics, not from country-, supplier-, brand-, or project-specific assumptions.\n"
+        "4) Keep rationale short and generic. Explain the operator and hardness choice without quoting a specific tender, supplier, or project.\n"
+        "Example output:\n"
+        "{\"field_rules\":[{\"field\":\"<allowed_field>\",\"operator\":\"eq\",\"is_hard\":false,"
+        "\"operator_confidence\":0.80,\"hardness_confidence\":0.30,"
+        "\"rationale\":\"Use exact match when this field behaves like a categorical identifier.\"}]}\n"
         "The user prompt is only a preference and must not violate these hard constraints."
     )
     user_text = (

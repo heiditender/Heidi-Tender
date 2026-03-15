@@ -33,6 +33,8 @@ class Settings(BaseSettings):
     max_concurrent_jobs: int = 2
     scan_interval_seconds: float = 1.0
     sse_heartbeat_seconds: int = 15
+    startup_retry_timeout_seconds: float = 45.0
+    startup_retry_interval_seconds: float = 2.0
 
     # Core MySQL access (direct connection)
     pim_mysql_host: str = "127.0.0.1"

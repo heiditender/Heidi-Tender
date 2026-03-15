@@ -42,6 +42,23 @@ class TestStep7Contract(unittest.TestCase):
     def test_accepts_llm_execution_summary(self):
         payload = {
             "match_results": [],
+            "pre_rank_summary": {
+                "total_candidates_before": 50,
+                "total_candidates_after": 15,
+                "products_truncated": 1,
+                "numeric_mode_products": 1,
+                "string_fallback_products": 0,
+                "product_summaries": [
+                    {
+                        "product_key": "item_001",
+                        "mode": "numeric",
+                        "comparable_numeric_count": 4,
+                        "comparable_string_count": 2,
+                        "candidate_count_before": 50,
+                        "candidate_count_after": 15,
+                    }
+                ],
+            },
             "llm_execution": {
                 "step_name": "step7_rank_candidates",
                 "request_started_at": "2026-03-13T20:00:00Z",
@@ -61,6 +78,18 @@ class TestStep7Contract(unittest.TestCase):
         normalized = validate_step7_data(payload)
         self.assertEqual(normalized["llm_execution"]["step_name"], "step7_rank_candidates")
         self.assertTrue(normalized["llm_execution"]["fallback_used"])
+        self.assertEqual(normalized["pre_rank_summary"]["total_candidates_after"], 15)
+
+    def test_rejects_duplicate_product_keys(self):
+        payload = {
+            "match_results": [
+                {"product_key": "item_017", "candidates": []},
+                {"product_key": "item_017", "candidates": []},
+            ]
+        }
+
+        with self.assertRaisesRegex(ValueError, "duplicate product_key in Step7 output: item_017"):
+            validate_step7_data(payload)
 
 
 if __name__ == "__main__":

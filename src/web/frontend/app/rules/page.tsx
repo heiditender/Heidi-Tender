@@ -138,6 +138,13 @@ function asNumber(input: unknown): number | null {
   return input;
 }
 
+function asStringArray(input: unknown): string[] {
+  if (!Array.isArray(input)) {
+    return [];
+  }
+  return input.filter((item): item is string => typeof item === "string" && item.length > 0);
+}
+
 function parseCopilotExecutionSummary(input: unknown): CopilotExecutionSummary | null {
   const payload = asRecord(input);
   if (!payload) return null;
@@ -433,6 +440,7 @@ export default function RulesPage() {
       let executionSummary: CopilotExecutionSummary | null = null;
       let modelSnapshot = modelSettings.current_model;
       let reasoningBuffer = "";
+      let sanitizationWarnings: string[] = [];
 
       await streamRuleDraftPreview(copilotPrompt, ({ event, data }) => {
         if (event === "reasoning_summary_delta") {
@@ -480,6 +488,7 @@ export default function RulesPage() {
           if (streamModel === "gpt-5.4" || streamModel === "gpt-5-mini") {
             modelSnapshot = streamModel;
           }
+          sanitizationWarnings = asStringArray(data.sanitization_warnings);
           return;
         }
         if (event === "error") {
@@ -517,7 +526,10 @@ export default function RulesPage() {
         execution_summary: summaryForLog,
       };
       setPendingCopilotLog(nextLog);
-      setNotice({ tone: "success", message: 'Rule preview loaded into editor. It is saved only when you click "Save Draft".' });
+      const baseMessage = 'Rule preview loaded into editor. It is saved only when you click "Save Draft".';
+      const message =
+        sanitizationWarnings.length > 0 ? `${baseMessage} ${sanitizationWarnings.join(" ")}` : baseMessage;
+      setNotice({ tone: "success", message });
     } catch (error) {
       setNotice({ tone: "error", message: toGuidedError(error, "Retry generation later, or edit the draft manually.") });
     } finally {

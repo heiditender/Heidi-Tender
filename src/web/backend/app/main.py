@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
+import time
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,6 +21,7 @@ from .repositories.rules import RuleRepository
 from .services.rules import allowed_fields_from_schema, fetch_schema_payload, validate_rule_payload
 
 settings = get_settings()
+logger = logging.getLogger(__name__)
 app = FastAPI(title=settings.app_name)
 
 app.add_middleware(
@@ -106,6 +109,50 @@ def _seed_rule_if_needed() -> None:
         )
 
 
+def _bootstrap_runtime_database_state() -> None:
+    Base.metadata.create_all(bind=engine)
+    _ensure_runtime_schema_extensions()
+    _ensure_runtime_indexes()
+    _ensure_app_settings_defaults()
+
+
+def _run_startup_step_with_retry(
+    step_name: str,
+    func,
+    *,
+    timeout_seconds: float,
+    interval_seconds: float,
+    monotonic_fn=time.monotonic,
+    sleep_fn=time.sleep,
+) -> None:
+    deadline = monotonic_fn() + max(0.0, timeout_seconds)
+    attempts = 0
+
+    while True:
+        attempts += 1
+        try:
+            func()
+            if attempts > 1:
+                logger.info("Startup step '%s' succeeded on attempt %s.", step_name, attempts)
+            return
+        except Exception as exc:
+            now = monotonic_fn()
+            if now >= deadline:
+                raise RuntimeError(
+                    f"startup step '{step_name}' failed after {attempts} attempts: {exc}"
+                ) from exc
+            remaining = max(0.0, deadline - now)
+            logger.warning(
+                "Startup step '%s' failed on attempt %s; retrying in %.1fs (%.1fs remaining): %s",
+                step_name,
+                attempts,
+                interval_seconds,
+                remaining,
+                exc,
+            )
+            sleep_fn(interval_seconds)
+
+
 def _ensure_runtime_indexes() -> None:
     dialect = engine.dialect.name
     if dialect == "postgresql":
@@ -151,8 +198,15 @@ def _ensure_app_settings_defaults() -> None:
 @app.on_event("startup")
 def on_startup() -> None:
     settings.jobs_root.mkdir(parents=True, exist_ok=True)
-    Base.metadata.create_all(bind=engine)
-    _ensure_runtime_schema_extensions()
-    _ensure_runtime_indexes()
-    _ensure_app_settings_defaults()
-    _seed_rule_if_needed()
+    _run_startup_step_with_retry(
+        "runtime_database_bootstrap",
+        _bootstrap_runtime_database_state,
+        timeout_seconds=settings.startup_retry_timeout_seconds,
+        interval_seconds=settings.startup_retry_interval_seconds,
+    )
+    _run_startup_step_with_retry(
+        "seed_default_rules",
+        _seed_rule_if_needed,
+        timeout_seconds=settings.startup_retry_timeout_seconds,
+        interval_seconds=settings.startup_retry_interval_seconds,
+    )

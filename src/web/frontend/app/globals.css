@@ -733,6 +733,70 @@ pre {
   font-size: 0.75rem;
 }
 
+.step7-candidate-table {
+  table-layout: fixed;
+}
+
+.step7-candidate-table-compact {
+  min-width: 820px;
+}
+
+.step7-candidate-table-full {
+  min-width: 1040px;
+}
+
+.step7-candidate-table thead th.step7-col-rank,
+.step7-candidate-table tbody td.step7-col-rank {
+  width: 4.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.step7-candidate-table thead th.step7-col-product,
+.step7-candidate-table tbody td.step7-col-product {
+  width: 20rem;
+  text-align: left;
+}
+
+.step7-candidate-table-compact thead th.step7-col-product,
+.step7-candidate-table-compact tbody td.step7-col-product {
+  width: 22rem;
+}
+
+.step7-candidate-table thead th.step7-col-soft,
+.step7-candidate-table tbody td.step7-col-soft {
+  width: 6rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.step7-candidate-table thead th.step7-col-hard,
+.step7-candidate-table tbody td.step7-col-hard {
+  width: 7rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.step7-candidate-table thead th.step7-col-constraints,
+.step7-candidate-table tbody td.step7-col-constraints {
+  width: 9rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.step7-candidate-table thead th.step7-col-explanation,
+.step7-candidate-table tbody td.step7-col-explanation {
+  width: 20rem;
+  text-align: left;
+}
+
+.step7-candidate-table tbody td.step7-col-rank,
+.step7-candidate-table tbody td.step7-col-soft,
+.step7-candidate-table tbody td.step7-col-hard,
+.step7-candidate-table tbody td.step7-col-constraints {
+  vertical-align: middle;
+}
+
 .step-detail-sql-preview {
   margin: 0.56rem 0 0;
   max-height: 140px;

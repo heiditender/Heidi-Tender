@@ -73,6 +73,24 @@ interface ParsedMatchResult {
   candidates: ParsedCandidate[];
 }
 
+interface ParsedPreRankProductSummary {
+  productKey: string;
+  mode: string;
+  comparableNumericCount: number;
+  comparableStringCount: number;
+  candidateCountBefore: number;
+  candidateCountAfter: number;
+}
+
+interface ParsedPreRankSummary {
+  totalCandidatesBefore: number;
+  totalCandidatesAfter: number;
+  productsTruncated: number;
+  numericModeProducts: number;
+  stringFallbackProducts: number;
+  productSummaries: ParsedPreRankProductSummary[];
+}
+
 function asRecord(input: unknown): Record<string, unknown> | null {
   if (!input || typeof input !== "object" || Array.isArray(input)) {
     return null;
@@ -302,6 +320,69 @@ function parseMatchResults(input: unknown): ParsedMatchResult[] {
       };
     })
     .filter((value): value is ParsedMatchResult => value != null);
+}
+
+function parsePreRankSummary(input: unknown): ParsedPreRankSummary | null {
+  const row = asRecord(input);
+  if (!row) {
+    return null;
+  }
+  const totalCandidatesBefore = asNumber(row.total_candidates_before);
+  const totalCandidatesAfter = asNumber(row.total_candidates_after);
+  const productsTruncated = asNumber(row.products_truncated);
+  const numericModeProducts = asNumber(row.numeric_mode_products);
+  const stringFallbackProducts = asNumber(row.string_fallback_products);
+  if (
+    totalCandidatesBefore == null ||
+    totalCandidatesAfter == null ||
+    productsTruncated == null ||
+    numericModeProducts == null ||
+    stringFallbackProducts == null
+  ) {
+    return null;
+  }
+
+  const productSummaries = asArray(row.product_summaries)
+    .map((item) => {
+      const data = asRecord(item);
+      if (!data) {
+        return null;
+      }
+      const productKey = asString(data.product_key);
+      const mode = asString(data.mode);
+      const comparableNumericCount = asNumber(data.comparable_numeric_count);
+      const comparableStringCount = asNumber(data.comparable_string_count);
+      const candidateCountBefore = asNumber(data.candidate_count_before);
+      const candidateCountAfter = asNumber(data.candidate_count_after);
+      if (
+        !productKey ||
+        !mode ||
+        comparableNumericCount == null ||
+        comparableStringCount == null ||
+        candidateCountBefore == null ||
+        candidateCountAfter == null
+      ) {
+        return null;
+      }
+      return {
+        productKey,
+        mode,
+        comparableNumericCount,
+        comparableStringCount,
+        candidateCountBefore,
+        candidateCountAfter
+      };
+    })
+    .filter((value): value is ParsedPreRankProductSummary => value != null);
+
+  return {
+    totalCandidatesBefore,
+    totalCandidatesAfter,
+    productsTruncated,
+    numericModeProducts,
+    stringFallbackProducts,
+    productSummaries
+  };
 }
 
 function kpiCard(label: string, value: string | number, hint: string): ReactNode {
@@ -648,6 +729,7 @@ function renderStep7(step: StepProgressState, compactMode: boolean, resultLimit:
     return renderStructuredFallback(step.stepName);
   }
   const matchResults = parseMatchResults(data.match_results);
+  const preRankSummary = parsePreRankSummary(data.pre_rank_summary);
   if (matchResults.length === 0) {
     return renderStructuredFallback(step.stepName);
   }
@@ -665,13 +747,24 @@ function renderStep7(step: StepProgressState, compactMode: boolean, resultLimit:
         {kpiCard("Total Candidates", totalCandidates, "All candidates combined")}
         {kpiCard("Hard Constraint Pass", hardPassCount, "passes_hard=true")}
         {kpiCard("Avg Soft Score", avgSoftScore.toFixed(3), "Average soft_match_score")}
+        {preRankSummary ? kpiCard("Candidates Before", preRankSummary.totalCandidatesBefore, "All SQL candidates before Step7 compression") : null}
+        {preRankSummary ? kpiCard("Shortlist Sent", preRankSummary.totalCandidatesAfter, "Candidates kept after pre-rank compression") : null}
+        {preRankSummary ? kpiCard("Products Truncated", preRankSummary.productsTruncated, "Tender items where candidates were reduced to topK") : null}
+        {preRankSummary ? kpiCard("String Fallback", preRankSummary.stringFallbackProducts, "Products reduced with string-only fallback") : null}
       </div>
+      {preRankSummary && preRankSummary.stringFallbackProducts > 0 ? (
+        <InlineNotice
+          tone="warning"
+          message={`${preRankSummary.stringFallbackProducts} tender item(s) used string-only fallback because no comparable numeric soft constraints were available.`}
+          className="mt-3"
+        />
+      ) : null}
 
       <div className="step-detail-grid">
-        {matchResults.map((row) => {
+        {matchResults.map((row, index) => {
           const previewCandidates = row.candidates.slice(0, resultLimit);
           return (
-            <article key={row.productKey} className="step-detail-card">
+            <article key={`step7-${row.productKey}-${index}`} className="step-detail-card">
               <header className="step-detail-card-head">
                 <div>
                   <p className="step-detail-card-title">{row.productKey}</p>
@@ -680,36 +773,49 @@ function renderStep7(step: StepProgressState, compactMode: boolean, resultLimit:
                 <StatusBadge label={`Top ${previewCandidates.length}`} tone="active" />
               </header>
               <div className="overflow-auto rounded-xl border border-white/10">
-                <table className="data-table step-detail-table min-w-[780px]">
+                <table
+                  className={cx(
+                    "data-table step-detail-table step7-candidate-table",
+                    compactMode ? "step7-candidate-table-compact" : "step7-candidate-table-full"
+                  )}
+                >
                   <thead>
                     <tr>
-                      <th>rank</th>
-                      <th>product</th>
-                      <th>soft</th>
-                      <th>hard</th>
-                      <th>soft constraints</th>
-                      {!compactMode ? <th>explanation</th> : null}
+                      <th className="step7-col-rank">rank</th>
+                      <th className="step7-col-product">product</th>
+                      <th className="step7-col-soft">soft</th>
+                      <th className="step7-col-hard">hard</th>
+                      <th className="step7-col-constraints">soft constraints</th>
+                      {!compactMode ? <th className="step7-col-explanation">explanation</th> : null}
                     </tr>
                   </thead>
                   <tbody>
                     {previewCandidates.map((candidate) => (
                       <tr key={`${row.productKey}-${candidate.rank ?? "n"}-${candidate.dbProductId}`}>
-                        <td>{candidate.rank ?? "-"}</td>
-                        <td className="text-[12px]">
-                          <div className="font-mono">{candidate.dbProductId}</div>
-                          <div>{truncate(candidate.dbProductName, compactMode ? 56 : 88)}</div>
+                        <td className="step7-col-rank font-mono tabular-nums">{candidate.rank ?? "-"}</td>
+                        <td className="step7-col-product min-w-0 text-[12px]">
+                          <div className="font-mono text-[11px] text-slate-300 break-all">{candidate.dbProductId}</div>
+                          <div className="mt-1 break-words leading-5">{truncate(candidate.dbProductName, compactMode ? 56 : 88)}</div>
                         </td>
-                        <td>{candidate.softMatchScore != null ? candidate.softMatchScore.toFixed(3) : "-"}</td>
-                        <td>
-                          <StatusBadge
-                            label={candidate.passesHard == null ? "unknown" : candidate.passesHard ? "pass" : "fail"}
-                            tone={candidate.passesHard == null ? "idle" : candidate.passesHard ? "done" : "error"}
-                          />
+                        <td className="step7-col-soft font-mono tabular-nums">
+                          {candidate.softMatchScore != null ? candidate.softMatchScore.toFixed(3) : "-"}
                         </td>
-                        <td>
+                        <td className="step7-col-hard">
+                          <div className="flex justify-center">
+                            <StatusBadge
+                              label={candidate.passesHard == null ? "unknown" : candidate.passesHard ? "pass" : "fail"}
+                              tone={candidate.passesHard == null ? "idle" : candidate.passesHard ? "done" : "error"}
+                            />
+                          </div>
+                        </td>
+                        <td className="step7-col-constraints font-mono tabular-nums">
                           {candidate.matchedSoftCount} / {candidate.matchedSoftCount + candidate.unmetSoftCount}
                         </td>
-                        {!compactMode ? <td className="text-[12px]">{truncate(candidate.explanation, 150)}</td> : null}
+                        {!compactMode ? (
+                          <td className="step7-col-explanation text-[12px] leading-5 break-words align-top">
+                            {truncate(candidate.explanation, 150)}
+                          </td>
+                        ) : null}
                       </tr>
                     ))}
                   </tbody>

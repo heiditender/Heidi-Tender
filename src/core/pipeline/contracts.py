@@ -410,11 +410,48 @@ class Step7MatchResult(BaseModel):
         return normalized
 
 
+class Step7PreRankProductSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    product_key: str
+    mode: str = Field(pattern="^(numeric|string_fallback)$")
+    comparable_numeric_count: int = Field(ge=0)
+    comparable_string_count: int = Field(ge=0)
+    candidate_count_before: int = Field(ge=0)
+    candidate_count_after: int = Field(ge=0)
+
+
+class Step7PreRankSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    total_candidates_before: int = Field(ge=0)
+    total_candidates_after: int = Field(ge=0)
+    products_truncated: int = Field(ge=0)
+    numeric_mode_products: int = Field(ge=0)
+    string_fallback_products: int = Field(ge=0)
+    product_summaries: list[Step7PreRankProductSummary] = Field(default_factory=list)
+
+
 class Step7Data(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     match_results: list[Step7MatchResult] = Field(default_factory=list)
+    pre_rank_summary: Step7PreRankSummary | None = None
     llm_execution: LLMExecutionSummary | None = None
+
+    @field_validator("match_results")
+    @classmethod
+    def _unique_product_keys(cls, value: list[Step7MatchResult]) -> list[Step7MatchResult]:
+        seen: set[str] = set()
+        duplicates: set[str] = set()
+        for row in value:
+            if row.product_key in seen:
+                duplicates.add(row.product_key)
+            seen.add(row.product_key)
+        if duplicates:
+            text = ", ".join(sorted(duplicates))
+            raise ValueError(f"duplicate product_key in Step7 output: {text}")
+        return value
 
 
 class StepEnvelope(BaseModel):

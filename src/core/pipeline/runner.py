@@ -24,7 +24,7 @@ from .contracts import (
 )
 from .io_utils import collect_files, ensure_dir, generate_run_id, load_env_file, read_json, write_json
 from .kb_step import ensure_vector_store
-from .matching import build_fallback_step7
+from .matching import build_step7_prerank_bundle
 from .mysql_client import fetch_schema_metadata, parse_mysql_tsv, run_mysql_query
 from .openai_client import call_responses, extract_output_json, upload_file
 from .sql_builder import build_step4_merged, build_step5_sql
@@ -130,42 +130,70 @@ def _extract_step3_payload(raw: dict) -> tuple[dict, list[str]]:
 def _build_step2_prompt(allowed_fields: list[str]) -> str:
     fields_json = json.dumps(allowed_fields, ensure_ascii=False)
     return (
-        "You are an expert in extracting tender parameters for lighting products. "
-        "Task: extract parameters for each requested product from uploaded tender files.\n"
-        "You must output strict JSON and only use this structure:\n"
+        "You extract structured tender requirements for lighting products from uploaded files.\n"
+        "Goal: identify each requested product and map only explicit requirements to allowed schema fields.\n"
+        "Source of truth:\n"
+        "- Uploaded tender files are the only authority for explicit requirements.\n"
+        "- File search or web knowledge may help interpret terminology, abbreviations, units, and field mapping.\n"
+        "- Never add, strengthen, or assume a requirement that is not explicitly supported by the uploaded files.\n"
+        "Output strict JSON and use exactly this structure:\n"
         "{\n"
         '  "tender_products":[\n'
         "    {\n"
         '      "product_key":"item_001",\n'
-        '      "product_name":"...",\n'
+        '      "product_name":"<explicit product or line item name>",\n'
         '      "quantity":null,\n'
         '      "requirements":[\n'
         "        {\n"
-        '          "field":"vw_bid_specs.xxx",\n'
-        '          "value":..., \n'
+        '          "field":"<allowed_field>",\n'
+        '          "value":"<explicit value or [min,max] range>",\n'
         '          "unit":null,\n'
-        '          "source":{"file_name":"...","snippet":"..."},\n'
+        '          "source":{"file_name":"<file name>","snippet":"<short supporting snippet>"},\n'
         '          "extraction_confidence":0.0\n'
         "        }\n"
         "      ]\n"
         "    }\n"
         "  ],\n"
-        '  "uncertainties":[]\n'
+        '  "uncertainties":["<short note about ambiguity, conflict, or unmapped requirement>"]\n'
         "}\n"
-        "Hard rules:\n"
-        "1) Do not output operator/is_hard/hardness_confidence/operator_confidence in requirements.\n"
-        "2) field must be table.column and must exist in allowed_fields.\n"
-        "3) field cannot repeat under the same product_key.\n"
-        "4) Extract only parameter names and values (or ranges); do not write SQL.\n"
+        "Extraction policy:\n"
+        "1) Work schema-first: field must be table.column and must exist in allowed_fields.\n"
+        "2) Work evidence-first: every requirement must be backed by source.file_name and a short supporting snippet.\n"
+        "3) Precision over recall: when evidence is weak, conflicting, implied, or only supported by outside knowledge, omit the requirement and record the issue in uncertainties.\n"
+        "4) Do not output operator, is_hard, hardness_confidence, or operator_confidence in Step2 requirements.\n"
+        "5) Extract only parameter names and values or explicit ranges; do not write SQL.\n"
+        "6) If multiple files are uploaded, first identify the file or small set of files most likely to contain the authoritative tender product list and parameter schedule.\n"
+        "7) Prioritize files that enumerate line items, quantities, product names, requirement tables, or structured parameter columns. In Swiss tender packs, a Leistungsverzeichnis often serves this role, but verify this by content and structure rather than title alone.\n"
+        "8) Use that primary list or schedule file to define product boundaries, product_key grouping, product_name, and quantity whenever possible.\n"
+        "9) Use supplementary files to confirm, enrich, or clarify the same requested items. Do not create extra tender_products from marketing sheets, catalogs, datasheets, or general background documents unless they clearly define requested tender items.\n"
+        "10) If files conflict, prefer the primary list or schedule file for item identity and quantity, use other files for technical clarification when explicit, and record the conflict in uncertainties.\n"
+        "11) field cannot repeat under the same product_key. Merge repeated mentions into one best-supported requirement.\n"
+        "12) Create one tender_products entry per distinct requested product or line item. Merge corroborating evidence across files only when it clearly refers to the same item.\n"
+        "13) quantity must be explicit. If absent or unclear, use null.\n"
+        "14) product_name must come from the files. If the files do not name the requested item clearly, use null.\n"
+        "15) For a single explicit value, use a scalar. For an explicit closed range, use a two-item array [min, max]. Keep textual enumerations as strings or lists only when explicitly stated.\n"
+        "16) Keep unit separate when the files state one. Do not convert units unless the converted value is explicitly written in the files.\n"
+        "17) Do not treat example brands, reference products, supplier offers, optional accessories, or background narrative as requirements unless the files clearly make them mandatory for the requested item.\n"
+        "18) If a requirement is explicit but no safe allowed_fields mapping exists, omit it from requirements and mention the unmapped concept in uncertainties.\n"
+        "File-type guidance:\n"
+        "- PDF: inspect headings, schedules, notes, legends, footnotes, and prose around tables; important constraints may appear in sentences rather than cells.\n"
+        "- DOCX: use both narrative sections and embedded tables; table headers, merged cells, and nearby headings often define parameter meaning.\n"
+        "- XLSX: use sheet names, header rows, units columns, merged section labels, and row context when mapping each value.\n"
+        "Quality checks before finishing:\n"
+        "- No non-schema fields.\n"
+        "- No duplicate field within a product.\n"
+        "- No invented requirements.\n"
+        "- Keep snippets short and specific.\n"
         f"allowed_fields:\n{fields_json}\n"
     )
 
 
 def _build_step7_prompt() -> str:
     return (
-        "You are an expert at ranking tender candidates. Input includes step4 (requirements + hard/soft constraints) "
-        "and step6 (SQL candidate results).\n"
-        "Output strict JSON only, with this structure:\n"
+        "You rerank pre-shortlisted candidate products for each tender product.\n"
+        "Input is a compressed shortlist payload created after deterministic pre-ranking.\n"
+        "The input payload contains a products array. Produce exactly one match_results object for each input product_key, in the same order as the input products array.\n"
+        "Output strict JSON only, with exactly this structure:\n"
         "{\n"
         '  "match_results":[\n'
         "    {\n"
@@ -173,24 +201,38 @@ def _build_step7_prompt() -> str:
         '      "candidates":[\n'
         "        {\n"
         '          "rank":1,\n'
-        '          "db_product_id":123,\n'
-        '          "db_product_name":"...",\n'
+        '          "db_product_id":"<candidate id>",\n'
+        '          "db_product_name":"<candidate name>",\n'
         '          "passes_hard":true,\n'
         '          "soft_match_score":0.0,\n'
-        '          "matched_soft_constraints":["vw_bid_specs.cri"],\n'
-        '          "unmet_soft_constraints":["vw_bid_specs.ugr"],\n'
-        '          "explanation":"..."\n'
+        '          "matched_soft_constraints":["<soft_field>"],\n'
+        '          "unmet_soft_constraints":["<soft_field>"],\n'
+        '          "explanation":"<short soft-fit explanation>"\n'
         "        }\n"
         "      ]\n"
         "    }\n"
         "  ],\n"
         '  "uncertainties":[]\n'
         "}\n"
-        "Rules:\n"
-        "1) Rank candidates using only soft constraints where is_hard=false and operator exists.\n"
-        "2) Hard constraints are already filtered by SQL; do not relax them again.\n"
-        "3) Recommended score range is [0,1].\n"
+        "Ranking policy:\n"
+        "1) Treat each product_key independently. Do not compare candidates across different requested products.\n"
+        "2) Only rank the shortlisted_candidates provided in the input. Do not invent, add, or reference candidates outside the shortlist.\n"
+        "3) Use pre_rank_score and numeric_field_details as structured evidence from deterministic numeric pre-ranking.\n"
+        "4) Use string_field_values and string_soft_constraints to refine ranking based on string semantics inside the shortlist.\n"
+        "5) Hard constraints are already filtered upstream. Do not relax, reinterpret, or penalize them again.\n"
+        "6) soft_match_score must be numeric in the range [0,1], where higher means better overall soft-constraint fit.\n"
+        "7) matched_soft_constraints and unmet_soft_constraints must contain only shortlisted soft-constraint field names that you can justify from the provided shortlist payload.\n"
+        "8) Keep explanation short, concrete, and focused on soft-constraint fit only.\n"
+        "9) If a product has no shortlisted candidates, return an empty candidates list for that product_key.\n"
+        "10) Respect the shortlist evidence; do not invent unsupported numeric comparisons or missing string facts.\n"
+        "11) Assign unique integer ranks starting at 1 within each product_key.\n"
+        "12) Never output the same product_key twice in match_results. Do not split one product_key across multiple objects.\n"
+        "13) Before finishing, verify that the set and count of product_key values in match_results exactly match the input products array: no duplicates, no omissions, no extras.\n"
     )
+
+
+def _build_step7_user_text(shortlist_payload: dict) -> str:
+    return "step7_shortlist_json:\n" + json.dumps(shortlist_payload, ensure_ascii=False)
 
 
 def _upload_tender_files(base_url: str, api_key: str, purpose: str, tender_files: list[Path]) -> list[str]:
@@ -839,6 +881,10 @@ def main(argv: list[str] | None = None) -> int:
     step7_uncertainties: list[str] = []
     step7_trace = LLMExecutionTrace("step7_rank_candidates")
     step7_stream_flush: Callable[[], None] = lambda: None
+    step7_bundle = build_step7_prerank_bundle(step4_data, step6_data)
+    step7_llm_input = step7_bundle.get("llm_input") or {"products": []}
+    step7_pre_rank_summary = step7_bundle.get("pre_rank_summary")
+    fallback_payload = step7_bundle.get("fallback_payload") or {"match_results": []}
     try:
         try:
             tools: list[dict] = []
@@ -856,12 +902,7 @@ def main(argv: list[str] | None = None) -> int:
                 tools.append({"type": "web_search", "external_web_access": True})
                 include.append("web_search_call.results")
 
-            user_text = (
-                "step4_json:\n"
-                + json.dumps(step4_data, ensure_ascii=False)
-                + "\n\nstep6_json:\n"
-                + json.dumps(step6_data, ensure_ascii=False)
-            )
+            user_text = _build_step7_user_text(step7_llm_input)
             stream_notify, step7_stream_flush = _build_llm_stream_notifier(
                 run_id,
                 "step7_rank_candidates",
@@ -903,6 +944,7 @@ def main(argv: list[str] | None = None) -> int:
             step7_data = validate_step7_data(
                 {
                     "match_results": raw_step7.get("match_results", []),
+                    "pre_rank_summary": step7_pre_rank_summary,
                     "llm_execution": _emit_llm_execution_summary(run_id, step7_trace),
                 }
             )
@@ -922,7 +964,6 @@ def main(argv: list[str] | None = None) -> int:
             step7_uncertainties.append(
                 f"Step7 LLM ranking failed and fallback ranking was used: {exc}"
             )
-            fallback_payload = build_fallback_step7(step4_data, step6_data)
             fallback_payload["llm_execution"] = _emit_llm_execution_summary(run_id, step7_trace)
             step7_data = validate_step7_data(fallback_payload)
 
