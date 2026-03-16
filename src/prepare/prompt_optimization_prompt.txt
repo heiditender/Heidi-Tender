@@ -1,0 +1,5 @@
+查看Heidi-Tender项目，里面由很多prompts，你是一个prompt优化专家，
+你需要询问我很多问题，并且结合这些原始prompts，来理解我的真正意图，
+然后评估当前的prompts是否匹配我的意图，对于一些成熟领域的prompt比如
+识别pdf、xlsx、docx内容，抽取requirement，你应该思考一下如何改进prompt
+使得llm的准确率提升。同时你的prompt中应该避免硬编码，来保持未来的泛化性

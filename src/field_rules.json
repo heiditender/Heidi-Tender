@@ -1,0 +1,36 @@
+{
+  "field_rules": [
+    {
+      "field": "vw_bid_specs.ugr",
+      "operator": "lte",
+      "is_hard": true,
+      "operator_confidence": 0.95,
+      "hardness_confidence": 0.95,
+      "rationale": "Direct UGR is the primary glare constraint."
+    },
+    {
+      "field": "vw_bid_specs.cri",
+      "operator": "gte",
+      "is_hard": false,
+      "operator_confidence": 0.9,
+      "hardness_confidence": 0.8,
+      "rationale": "CRI can be used as soft ranking signal unless explicitly mandatory."
+    },
+    {
+      "field": "vw_bid_specs.ip_rating",
+      "operator": "gte",
+      "is_hard": true,
+      "operator_confidence": 0.9,
+      "hardness_confidence": 0.9,
+      "rationale": "Ingress protection is often mandatory."
+    },
+    {
+      "field": "vw_bid_specs.ik_rating",
+      "operator": "gte",
+      "is_hard": false,
+      "operator_confidence": 0.8,
+      "hardness_confidence": 0.7,
+      "rationale": "Impact protection often contributes to ranking."
+    }
+  ]
+}

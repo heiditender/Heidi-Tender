@@ -1,0 +1,47 @@
+I want to build an end-to-end matching project for lighting tenders. The goal is to match products required in tender documents with products available in a supplier's catalog by comparing technical parameters.
+The implementation mainly relies on LLM capabilities (OpenAI API) and follows a multi-step LLM workflow.
+In this workflow, I provide inputs to the LLM, the LLM generates outputs, and those outputs are used as inputs for subsequent steps.
+
+The OpenAI API key (for later LLM requests), model selection, and supplier product database configuration
+(mainly `vw_bid_products` and `vw_bid_specs`, which include all technical parameters)
+can be found in `.env`.
+
+
+
+The multi-step workflow is as follows (including both LLM and non-LLM steps):
+{
+    "step1(LLM)": {
+        "input": "We have a knowledge base folder named upload_corpus_kb that must be uploaded to OpenAI vector store. It contains professional knowledge for the Swiss lighting industry.",
+        "task": "First check whether the vector store already has the corresponding knowledge base. If not, upload it; if yes, continue to the next step."
+    },
+    "step2(LLM)": {
+        "input": "Tender folder containing requirement documents for lighting products, and schemas of vw_bid_products and vw_bid_specs (including all field information, in JSON; if unavailable, query database schema in code and convert to JSON).",
+        "output": "Extract required parameter information for multiple lighting products in the tender, such as model, quantity, and technical parameters. Extract only parameter names and parameter values (or ranges). Parameter names must align with database schema and use table.field format so SQL can be built directly later. Output must be JSON.",
+        "note": "LLM may use web search and file search (searching the uploaded knowledge base) to gather information."
+    },
+    "step3(LLM)": {
+        "input": "Schemas of vw_bid_products and vw_bid_specs (including all field information, in JSON; if unavailable, query database schema in code and convert to JSON).",
+        "output": "Decide soft and hard constraints for the tender process: which parameters (fields) must be satisfied and which can be slightly unmet. Use is_hard to indicate hard constraints. Keep rules relatively relaxed and mark only the most critical requirements as hard constraints, because hard constraints are used to build SQL for filtering data (not selecting the final winner directly). Fewer hard constraints can preserve more candidates, but true hard constraints must not be ignored.",
+        "note": "LLM may use web search and file search (searching the uploaded knowledge base) to gather information."
+    },
+    "step4": {
+        "input": "Output of step2 and step3",
+        "output": "Use database fields from step3 output as keys, match corresponding fields in step2 output, and patch in soft/hard constraint decisions. This output is the merged result of step2 and step3.",
+        "note": "No LLM needed. This step can be completed with string matching and JSON mutation."
+    },
+    "step5": {
+        "input": "Output of step4",
+        "output": "Find all hard-constraint parameters and build SQL queries from them to fetch all products that satisfy those hard constraints. Since the tender may contain multiple requested products, this step produces the same number of SQL queries.",
+        "note": "No LLM needed. This step only requires JSON operations, string matching, and SQL templating."
+    },
+    "step6": {
+        "input": "Output of step5",
+        "output": "Execute SQL queries and append returned results to the input.",
+        "note": "No LLM needed."
+    },
+    "step7(LLM)": {
+        "input": "Output of step6 and step4",
+        "output": "Given the candidate supplier product set filtered by hard constraints, determine which product best fits each tender requirement based on soft constraints. Output a ranked candidate list, sorted by degree of soft-constraint satisfaction. Also report which soft constraints each candidate satisfies and which remain unmet.",
+        "note": "LLM may use web search and file search (searching the uploaded knowledge base) to gather information."
+    }
+}

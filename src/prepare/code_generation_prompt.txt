@@ -1,0 +1,15 @@
+The `src/prepare` folder contains `upload_corpus_kb` and `pim.sql`.
+`upload_corpus_kb` is the knowledge base folder required by step1 in core. You need to update its path in the external `pipeline.yaml` using a project-relative path.
+`pim.sql` is the SQL script for rebuilding the supplier product database. You need to:
+- write a script to execute this SQL and rebuild the supplier's MySQL product database;
+- package MySQL with Docker and define it in `docker-compose.yml`.
+When the project starts, launch Docker first and then execute the SQL script.
+
+
+You are a lighting tender rules expert. You need to infer the most appropriate parameter rules for lighting-product bidding.
+1. Cover as many parameters as possible. 
+2. Be conservative with hard constraints.
+3. Prioritize installation fit, compliance, safety, glare control, light quality, efficiency, lifetime, and electrical compatibility.
+
+
+Procurement teams should not have to spend days buried in tender documents, spreadsheets, and supplier catalogs. Heidi Tender changes that. It starts by letting users define the matching rules, so every decision reflects real business priorities. Then users upload tender files, and the system extracts key lighting requirements from complex, unstructured content. Next, Heidi Tender turns hard requirements into precise SQL filters, searches the supplier database, and ranks the best candidates with explainable AI scoring. The result is faster evaluation, clearer reasoning, and more confident bidding decisions. Heidi Tender does not just save time, it brings transparency and trust to the entire procurement process.

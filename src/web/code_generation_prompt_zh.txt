@@ -1,0 +1,32 @@
+Focus on the `Heidi-Tender` folder. Do not modify core code for now. I need to build a full-stack web service on top of it.
+Frontend uses Next.js + Tailwind CSS + TypeScript. Backend uses FastAPI + Python. Database uses PostgreSQL.
+The frontend is responsible for UI display and interaction, while the backend handles business logic and database interaction.
+
+Main idea:
+The backend should further wrap scripts provided by core (the core algorithm) into backend service APIs. The backend APIs should be elegant and minimal, making future maintenance and extension easy.
+
+
+Flows that need to be implemented:
+Users should be able to upload tender files or a tender folder in the frontend. The frontend sends files to the backend, the backend receives them and calls core APIs for processing, then returns processing results to the frontend for display.
+Allowed file types are only PDF, DOCX, and XLSX.
+Upload file by file and include relative paths.
+
+During processing, the frontend should provide interactive UI elements such as progress bars and status hints to improve user experience.
+During processing, the backend should handle various exceptions (for example, invalid file formats or processing failure) and return error messages for frontend display.
+During processing, the frontend should show intermediate results at each stage (for example parameter extraction, constraint decisions, and database query results) so users can clearly understand the full workflow.
+
+There is a file named `field_rules.json` in `src`. It contains rules and descriptions for database fields and is an important reference for soft/hard constraint judgment and numeric direction logic in core.
+This file should be shown in a frontend page for user reference, to help users understand field meaning and usage rules.
+Users should be able to edit these rules in the frontend, for example changing a field's constraint type (hard/soft), changing numeric direction (greater than/less than), and editing field descriptions. Updated rules should be saved to the backend and used by core with the latest version during processing.
+In addition, users should be able to use an LLM from the frontend to auto-generate rules.
+Whether users edit manually or use LLM generation, both should happen in the editor page, and users decide whether to submit changes.
+
+
+Development steps:
+1. **Environment setup**: Set up frontend and backend development environments. Frontend uses Next.js, backend uses FastAPI, and both should run smoothly.
+2. **Database design**: Based on the existing database structure, design database models and use SQLAlchemy or another ORM to interact with PostgreSQL.
+3. **API design**: Design backend APIs so the frontend can communicate via HTTP requests. APIs include fetching product info, submitting tender requirements, and related operations.
+4. **Frontend development**: Build frontend pages with Next.js and Tailwind CSS, including file upload, results display, and rule editing pages.
+5. **Backend development**: Build backend logic with FastAPI, including file upload handling, core API invocation, and database interaction.
+
+The project should maintain an elegant design style and emphasize scalability and maintainability. Use modular code structure and clear interface design to ensure project quality and maintainability.
