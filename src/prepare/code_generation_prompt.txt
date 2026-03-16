@@ -12,15 +12,4 @@ You are a lighting tender rules expert. You need to infer the most appropriate p
 3. Prioritize installation fit, compliance, safety, glare control, light quality, efficiency, lifetime, and electrical compatibility.
 
 
-Procurement teams should not have to spend days buried in tender 
-documents, spreadsheets, and supplier catalogs. Heidi Tender 
-changes that. It starts by letting users define the matching 
-rules, so every decision reflects real business priorities. 
-Then users upload tender files, and the system extracts key 
-lighting requirements from complex, unstructured content. Next, 
-Heidi Tender turns hard requirements into precise SQL filters, 
-searches the supplier database, and ranks the best candidates 
-with explainable AI scoring. The result is faster evaluation, 
-clearer reasoning, and more confident bidding decisions. Heidi 
-Tender does not just save time, it brings transparency and trust 
-to the entire procurement process.
+Procurement teams should not have to spend days buried in tender documents, spreadsheets, and supplier catalogs. Heidi Tender changes that. It starts by letting users define the matching rules, so every decision reflects real business priorities. Then users upload tender files, and the system extracts key lighting requirements from complex, unstructured content. Next, Heidi Tender turns hard requirements into precise SQL filters, searches the supplier database, and ranks the best candidates with explainable AI scoring. The result is faster evaluation, clearer reasoning, and more confident bidding decisions. Heidi Tender does not just save time, it brings transparency and trust to the entire procurement process.

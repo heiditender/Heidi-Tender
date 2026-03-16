@@ -58,22 +58,16 @@ Procurement teams spend too much time buried in PDFs, spreadsheets, supplier dat
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  U[User] --> FE[Next.js Frontend\nJobs / Rules / Stats]
-  FE -->|REST + SSE| BE[FastAPI Backend]
+<p align="center">
+  <img src="./assets/arch.png" alt="Heidi Tender Architecture" width="460" />
+</p>
 
-  BE --> PG[(PostgreSQL\nJobs / Steps / Events / Rule Versions / Settings)]
-  BE --> CORE[Core Pipeline Runtime\n7-step matching flow]
-
-  CORE --> MYSQL[(MySQL Supplier Product DB\nvia vw_bid_products + vw_bid_specs)]
-  INIT1[mysql-init\nimport pim.sql] --> MYSQL
-  INIT2[mysql-views-init\ncreate and refresh views] --> MYSQL
-
-  CORE --> KB[src/prepare/upload_corpus_kb\nKnowledge Base Bootstrap]
-```
 
 ## How Matching Works
+
+<p align="center">
+  <img src="./assets/workflow.png" alt="Heidi Tender Workflow" />
+</p>
 
 1. Knowledge-base bootstrap and vector store readiness check
 2. Requirement extraction from tender files
