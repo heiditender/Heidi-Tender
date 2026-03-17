@@ -5,23 +5,26 @@ from queue import Queue
 import threading
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from ..auth.dependencies import SessionUser, get_current_user
 from ..config import Settings, get_settings
 from ..db import get_db
 from ..models import RuleSource, RuleStatus
 from ..repositories.app_settings import AppSettingsRepository
+from ..repositories.auth import AuthRepository
 from ..repositories.rules import RuleRepository
 from ..schemas import (
-    GenerateRulesStreamRequest,
     GenerateRulesRequest,
+    GenerateRulesStreamRequest,
     PublishRuleResponse,
     RuleVersionResponse,
     SaveRuleDraftRequest,
 )
+from ..services.auth import enforce_same_origin, get_request_ip, get_request_user_agent
 from ..services.rules import (
     allowed_fields_from_schema,
     ensure_openai_key,
@@ -33,7 +36,6 @@ from ..services.rules import (
 
 
 router = APIRouter(prefix="/rules", tags=["rules"])
-
 
 
 def _to_response(row) -> RuleVersionResponse:
@@ -51,8 +53,32 @@ def _to_response(row) -> RuleVersionResponse:
     )
 
 
+def _log_rules_event(
+    *,
+    db: Session,
+    current_user: SessionUser,
+    request: Request,
+    event_type: str,
+    version_id: str,
+    payload: dict | None = None,
+) -> None:
+    AuthRepository(db).log_event(
+        event_type=event_type,
+        actor_user_id=current_user.user.id,
+        target_type="rule_version",
+        target_id=version_id,
+        email=current_user.user.primary_email,
+        ip_address=get_request_ip(request),
+        user_agent=get_request_user_agent(request),
+        payload=payload or {},
+    )
+
+
 @router.get("/current", response_model=RuleVersionResponse)
-def get_current_rules(db: Annotated[Session, Depends(get_db)]) -> RuleVersionResponse:
+def get_current_rules(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
+) -> RuleVersionResponse:
     repo = RuleRepository(db)
     row = repo.get_current_published()
     if row is None:
@@ -63,6 +89,7 @@ def get_current_rules(db: Annotated[Session, Depends(get_db)]) -> RuleVersionRes
 @router.get("/versions", response_model=list[RuleVersionResponse])
 def list_rule_versions(
     db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
     status: Annotated[RuleStatus | None, Query()] = None,
     source: Annotated[RuleSource | None, Query()] = None,
     q: Annotated[str | None, Query(min_length=1, max_length=120)] = None,
@@ -76,10 +103,13 @@ def list_rule_versions(
 
 @router.post("/draft", response_model=RuleVersionResponse)
 def save_rule_draft(
+    http_request: Request,
     request: SaveRuleDraftRequest,
     db: Annotated[Session, Depends(get_db)],
     settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
 ) -> RuleVersionResponse:
+    enforce_same_origin(http_request, settings)
     schema_payload = fetch_schema_payload(settings)
     allowed_fields = allowed_fields_from_schema(schema_payload)
 
@@ -94,16 +124,20 @@ def save_rule_draft(
         validation_report=report,
         copilot_log=copilot_log,
         note=request.note,
+        created_by_user_id=current_user.user.id,
     )
     return _to_response(row)
 
 
 @router.post("/generate", response_model=RuleVersionResponse)
 def generate_rule_draft(
+    http_request: Request,
     request: GenerateRulesRequest,
     db: Annotated[Session, Depends(get_db)],
     settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
 ) -> RuleVersionResponse:
+    enforce_same_origin(http_request, settings)
     schema_payload = fetch_schema_payload(settings)
     allowed_fields = allowed_fields_from_schema(schema_payload)
     settings_repo = AppSettingsRepository(db)
@@ -135,6 +169,7 @@ def generate_rule_draft(
             "execution_summary": execution_summary,
         },
         note=request.note,
+        created_by_user_id=current_user.user.id,
     )
     return _to_response(row)
 
@@ -145,10 +180,13 @@ def _encode_sse(event: str, data: dict) -> str:
 
 @router.post("/generate/stream")
 def generate_rule_preview_stream(
+    http_request: Request,
     request: GenerateRulesStreamRequest,
     db: Annotated[Session, Depends(get_db)],
     settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
 ):
+    enforce_same_origin(http_request, settings)
     ensure_openai_key(settings)
     schema_payload = fetch_schema_payload(settings)
     allowed_fields = allowed_fields_from_schema(schema_payload)
@@ -211,7 +249,14 @@ def generate_rule_preview_stream(
 
 
 @router.post("/{version_id}/publish", response_model=PublishRuleResponse)
-def publish_rule_version(version_id: str, db: Annotated[Session, Depends(get_db)]) -> PublishRuleResponse:
+def publish_rule_version(
+    version_id: str,
+    http_request: Request,
+    db: Annotated[Session, Depends(get_db)],
+    settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
+) -> PublishRuleResponse:
+    enforce_same_origin(http_request, settings)
     repo = RuleRepository(db)
     try:
         row = repo.publish(version_id)
@@ -222,4 +267,12 @@ def publish_rule_version(version_id: str, db: Annotated[Session, Depends(get_db)
         raise HTTPException(status_code=409, detail="conflict while publishing rule version") from exc
     if row.published_at is None:
         raise HTTPException(status_code=500, detail="rule publish timestamp is missing")
+    _log_rules_event(
+        db=db,
+        current_user=current_user,
+        request=http_request,
+        event_type="rules.published",
+        version_id=row.id,
+        payload={"version_number": row.version_number},
+    )
     return PublishRuleResponse(id=row.id, status=row.status, published_at=row.published_at)

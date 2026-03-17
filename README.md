@@ -107,6 +107,20 @@ OPENAI_MODEL=gpt-5-mini
 docker compose up --build
 ```
 
+### Production
+
+Use the dedicated production stack and deployment guide:
+
+- Environment template: [`.env.prod.example`](./.env.prod.example)
+- Production Compose file: [`docker-compose.prod.yml`](./docker-compose.prod.yml)
+- Full guide: [`docs/production-deployment.md`](./docs/production-deployment.md)
+
+Public deployments can enable:
+
+- Google OIDC login
+- Microsoft OIDC login
+- Optional email magic-link login via Resend
+
 ### Endpoints
 
 - Frontend: `http://localhost:3000`
@@ -159,6 +173,18 @@ docker compose up --build
 - `GET /api/v1/settings/model`
 - `PUT /api/v1/settings/model`
 - `GET /api/v1/stats/dashboard`
+
+### Auth
+
+- `GET /api/v1/auth/options`
+- `GET /api/v1/auth/login/google`
+- `GET /api/v1/auth/callback/google`
+- `GET /api/v1/auth/login/microsoft`
+- `GET /api/v1/auth/callback/microsoft`
+- `POST /api/v1/auth/magic-link/request`
+- `GET /api/v1/auth/magic-link/verify`
+- `GET /api/v1/auth/session`
+- `POST /api/v1/auth/logout`
 
 ## Local Development
 

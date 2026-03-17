@@ -9,3 +9,6 @@ requests>=2.31.0
 json-repair>=0.28.0
 PyMySQL>=1.1.1
 pytest>=8.2.0
+alembic>=1.14.0
+PyJWT[crypto]>=2.10.0
+email-validator>=2.2.0

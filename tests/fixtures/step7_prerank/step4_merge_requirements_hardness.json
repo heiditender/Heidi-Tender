@@ -1,0 +1,1 @@
+{"data":{"tender_products":[{"product_key":"historic_item_001","product_name":"Historic Tender Product","requirements":[{"field":"vw_bid_specs.light_output","operator":"gte","value":100,"is_hard":false},{"field":"vw_bid_products.manufacturer_name","operator":"contains","value":"Brand","is_hard":false}]}]}}

@@ -1,16 +1,20 @@
 from __future__ import annotations
 
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 
+from fastapi import Request
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
+from app.auth.dependencies import SessionUser
 from app.api import rules as rules_api
 from app.config import Settings
 from app.db import Base
+from app.models import User, UserSession
 from app.schemas import GenerateRulesRequest, GenerateRulesStreamRequest
 
 
@@ -25,6 +29,36 @@ def _build_session(tmp_path: Path) -> tuple[Session, Settings]:
     testing_session = sessionmaker(bind=engine, autoflush=False, autocommit=False, expire_on_commit=False)
     settings = Settings(openai_api_key="test-key", jobs_root=tmp_path / "jobs")
     return testing_session(), settings
+
+
+def _mock_request() -> Request:
+    return Request(
+        {
+            "type": "http",
+            "method": "POST",
+            "scheme": "http",
+            "path": "/api/v1/rules/generate",
+            "headers": [(b"origin", b"http://localhost:3000")],
+            "client": ("127.0.0.1", 1234),
+        }
+    )
+
+
+def _current_user(db: Session) -> SessionUser:
+    now = datetime.now(timezone.utc)
+    user = User(id="user-001", primary_email="analyst@example.com", email_verified=True)
+    session = UserSession(
+        id="sess-001",
+        user_id=user.id,
+        token_hash="hash",
+        created_at=now,
+        last_used_at=now,
+        idle_expires_at=now + timedelta(hours=1),
+        absolute_expires_at=now + timedelta(days=7),
+    )
+    db.add(user)
+    db.flush()
+    return SessionUser(user=user, session=session)
 
 
 def _mock_rule_generation(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -106,9 +140,11 @@ def test_generate_rule_draft_endpoint_sanitizes_extra_keys(
 
     try:
         response = rules_api.generate_rule_draft(
+            http_request=_mock_request(),
             request=GenerateRulesRequest(note="copilot draft"),
             db=db,
             settings=settings,
+            current_user=_current_user(db),
         )
     finally:
         db.close()
@@ -128,9 +164,11 @@ async def test_generate_rule_preview_stream_returns_sanitized_preview(
 
     try:
         response = rules_api.generate_rule_preview_stream(
+            http_request=_mock_request(),
             request=GenerateRulesStreamRequest(prompt="office lighting"),
             db=db,
             settings=settings,
+            current_user=_current_user(db),
         )
         chunks: list[str] = []
         async for chunk in response.body_iterator:

@@ -7,9 +7,14 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+FIXTURE_ROOT = ROOT / "tests" / "fixtures" / "step7_prerank"
 sys.path.insert(0, str(ROOT / "src" / "core"))
 
 from pipeline.matching import build_step7_prerank_bundle  # noqa: E402
+
+
+def _load_json_fixture(name: str) -> dict:
+    return json.loads((FIXTURE_ROOT / name).read_text(encoding="utf-8"))
 
 
 class TestStep7PreRank(unittest.TestCase):
@@ -168,9 +173,8 @@ class TestStep7PreRank(unittest.TestCase):
         self.assertEqual(match_results[1]["candidates"][0]["db_product_id"], 4)
 
     def test_historical_payload_is_compressed_before_llm(self):
-        base = ROOT / "src" / "web" / "backend" / "data" / "jobs" / "7bcab71a-d0f4-4094-8dce-40c073cc435e" / "core_runtime" / "20260315_175548_lxqrd7"
-        step4_data = json.loads((base / "step4_merge_requirements_hardness.json").read_text(encoding="utf-8"))["data"]
-        step6_data = json.loads((base / "step6_execute_sql.json").read_text(encoding="utf-8"))["data"]
+        step4_data = _load_json_fixture("step4_merge_requirements_hardness.json")["data"]
+        step6_data = _load_json_fixture("step6_execute_sql.json")["data"]
 
         bundle = build_step7_prerank_bundle(step4_data, step6_data)
         summary = bundle["pre_rank_summary"]
