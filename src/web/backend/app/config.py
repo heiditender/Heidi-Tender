@@ -50,6 +50,30 @@ class Settings(BaseSettings):
 
     core_skip_kb_bootstrap: bool = False
 
+    cors_allowed_origins: str = "http://localhost:3000,http://127.0.0.1:3000,https://heiditender.ch,https://www.heiditender.ch"
+    auth_session_cookie_name: str = "__Host-heidi_session"
+    auth_oauth_cookie_name: str = "__Host-heidi_oauth"
+    auth_session_secret: str = "change-me"
+    auth_public_base_url: str = "http://localhost:8000"
+    auth_frontend_base_url: str = "http://localhost:3000"
+    auth_google_client_id: str | None = None
+    auth_google_client_secret: str | None = None
+    auth_google_redirect_uri: str | None = None
+    auth_microsoft_client_id: str | None = None
+    auth_microsoft_client_secret: str | None = None
+    auth_microsoft_redirect_uri: str | None = None
+    auth_magic_link_sender_email: str | None = None
+    auth_resend_api_key: str | None = None
+    auth_magic_link_base_url: str | None = None
+    auth_magic_link_subject: str = "Your Heidi Tender sign-in link"
+    auth_session_idle_timeout_seconds: int = 24 * 60 * 60
+    auth_session_absolute_timeout_seconds: int = 14 * 24 * 60 * 60
+    auth_magic_link_ttl_seconds: int = 15 * 60
+    auth_magic_link_requests_per_email_window: int = 5
+    auth_magic_link_requests_per_ip_window: int = 10
+    auth_rate_limit_window_seconds: int = 15 * 60
+    auth_http_timeout_seconds: float = 10.0
+
     @field_validator("project_root", mode="before")
     @classmethod
     def _normalize_project_root(cls, value: str | Path) -> Path:
@@ -98,6 +122,35 @@ class Settings(BaseSettings):
     @property
     def allowed_openai_models(self) -> list[str]:
         return ["gpt-5.4", "gpt-5-mini"]
+
+    @property
+    def cors_allowed_origin_list(self) -> list[str]:
+        return [item.strip().rstrip("/") for item in self.cors_allowed_origins.split(",") if item.strip()]
+
+    @property
+    def trusted_web_origins(self) -> set[str]:
+        origins = set(self.cors_allowed_origin_list)
+        origins.add(self.auth_public_base_url.rstrip("/"))
+        origins.add(self.auth_frontend_base_url.rstrip("/"))
+        return {item for item in origins if item}
+
+    @property
+    def google_redirect_uri(self) -> str:
+        if self.auth_google_redirect_uri:
+            return self.auth_google_redirect_uri
+        return f"{self.auth_public_base_url.rstrip('/')}{self.api_prefix}/auth/callback/google"
+
+    @property
+    def microsoft_redirect_uri(self) -> str:
+        if self.auth_microsoft_redirect_uri:
+            return self.auth_microsoft_redirect_uri
+        return f"{self.auth_public_base_url.rstrip('/')}{self.api_prefix}/auth/callback/microsoft"
+
+    @property
+    def magic_link_base_url(self) -> str:
+        if self.auth_magic_link_base_url:
+            return self.auth_magic_link_base_url.rstrip("/")
+        return self.auth_public_base_url.rstrip("/")
 
 
 @lru_cache(maxsize=1)

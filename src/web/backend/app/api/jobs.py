@@ -10,11 +10,14 @@ from fastapi import APIRouter, Body, Depends, File, Form, Header, HTTPException,
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
+from ..auth.dependencies import SessionUser, get_current_user
 from ..config import Settings, get_settings
 from ..db import SessionLocal, get_db
 from ..models import JobStatus
+from ..repositories.auth import AuthRepository
 from ..repositories.jobs import JobRepository
 from ..schemas import JobCreateResponse, JobResponse, StartJobRequest
+from ..services.auth import enforce_same_origin, get_request_ip, get_request_user_agent
 from ..services.executor import get_job_executor
 from ..services.uploads import store_archive_upload, store_single_upload
 
@@ -22,13 +25,18 @@ from ..services.uploads import store_archive_upload, store_single_upload
 router = APIRouter(prefix="/jobs", tags=["jobs"])
 
 
-
-def _job_to_response(repo: JobRepository, job_id: str, warnings: list[str] | None = None) -> JobResponse:
-    job = repo.get_job(job_id)
+def _job_to_response(
+    repo: JobRepository,
+    job_id: str,
+    *,
+    owner_user_id: str,
+    warnings: list[str] | None = None,
+) -> JobResponse:
+    job = repo.get_job(job_id, owner_user_id=owner_user_id)
     if job is None:
         raise HTTPException(status_code=404, detail="job not found")
-    files = repo.list_job_files(job_id)
-    steps = repo.list_job_steps(job_id)
+    files = repo.list_job_files(job_id, owner_user_id=owner_user_id)
+    steps = repo.list_job_steps(job_id, owner_user_id=owner_user_id)
     return JobResponse(
         id=job.id,
         status=job.status,
@@ -65,17 +73,46 @@ def _job_to_response(repo: JobRepository, job_id: str, warnings: list[str] | Non
     )
 
 
+def _log_job_event(
+    *,
+    db: Session,
+    current_user: SessionUser,
+    request: Request,
+    event_type: str,
+    job_id: str,
+    payload: dict | None = None,
+) -> None:
+    AuthRepository(db).log_event(
+        event_type=event_type,
+        actor_user_id=current_user.user.id,
+        target_type="job",
+        target_id=job_id,
+        email=current_user.user.primary_email,
+        ip_address=get_request_ip(request),
+        user_agent=get_request_user_agent(request),
+        payload=payload or {},
+    )
+
+
 @router.post("", response_model=JobCreateResponse)
-def create_job(db: Annotated[Session, Depends(get_db)]) -> JobCreateResponse:
+def create_job(
+    request: Request,
+    db: Annotated[Session, Depends(get_db)],
+    settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
+) -> JobCreateResponse:
+    enforce_same_origin(request, settings)
     repo = JobRepository(db)
-    job = repo.create_job()
+    job = repo.create_job(owner_user_id=current_user.user.id)
     repo.append_event(job_id=job.id, event_type="job_created", payload={"status": job.status.value})
+    _log_job_event(db=db, current_user=current_user, request=request, event_type="job.created", job_id=job.id)
     return JobCreateResponse(id=job.id, status=job.status, created_at=job.created_at)
 
 
 @router.get("", response_model=list[JobResponse])
 def list_jobs(
     db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
     status: Annotated[JobStatus | None, Query()] = None,
     q: Annotated[str | None, Query(min_length=1, max_length=120)] = None,
     updated_from: Annotated[datetime | None, Query()] = None,
@@ -88,6 +125,7 @@ def list_jobs(
 
     repo = JobRepository(db)
     jobs = repo.list_jobs(
+        owner_user_id=current_user.user.id,
         status=status,
         query=q,
         updated_from=updated_from,
@@ -126,13 +164,16 @@ def list_jobs(
 @router.post("/{job_id}/file", response_model=JobResponse)
 def upload_single_file(
     job_id: str,
+    request: Request,
     db: Annotated[Session, Depends(get_db)],
     settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
     file: UploadFile = File(...),
     relative_path: str = Form(...),
 ) -> JobResponse:
+    enforce_same_origin(request, settings)
     repo = JobRepository(db)
-    job = repo.get_job(job_id)
+    job = repo.get_job(job_id, owner_user_id=current_user.user.id)
     if job is None:
         raise HTTPException(status_code=404, detail="job not found")
     if job.status in {JobStatus.running, JobStatus.succeeded}:
@@ -161,18 +202,21 @@ def upload_single_file(
         event_type="file_uploaded",
         payload={"relative_path": stored.relative_path, "size_bytes": stored.size_bytes},
     )
-    return _job_to_response(repo, job_id)
+    return _job_to_response(repo, job_id, owner_user_id=current_user.user.id)
 
 
 @router.post("/{job_id}/archive", response_model=JobResponse)
 def upload_archive(
     job_id: str,
+    request: Request,
     db: Annotated[Session, Depends(get_db)],
     settings: Annotated[Settings, Depends(get_settings)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
     file: UploadFile = File(...),
 ) -> JobResponse:
+    enforce_same_origin(request, settings)
     repo = JobRepository(db)
-    job = repo.get_job(job_id)
+    job = repo.get_job(job_id, owner_user_id=current_user.user.id)
     if job is None:
         raise HTTPException(status_code=404, detail="job not found")
     if job.status in {JobStatus.running, JobStatus.succeeded}:
@@ -212,46 +256,65 @@ def upload_archive(
             "warnings": result.warnings,
         },
     )
-    return _job_to_response(repo, job_id, warnings=result.warnings)
+    return _job_to_response(repo, job_id, owner_user_id=current_user.user.id, warnings=result.warnings)
 
 
 @router.post("/{job_id}/start", response_model=JobResponse)
 def start_job(
     job_id: str,
+    http_request: Request,
     db: Annotated[Session, Depends(get_db)],
     settings: Annotated[Settings, Depends(get_settings)],
-    request: StartJobRequest = Body(default_factory=StartJobRequest),
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
+    body: StartJobRequest = Body(default_factory=StartJobRequest),
 ) -> JobResponse:
+    enforce_same_origin(http_request, settings)
     if not settings.openai_api_key:
         raise HTTPException(
             status_code=422,
             detail="OpenAI API key is not configured. Please configure OPENAI_API_KEY before starting jobs.",
         )
     repo = JobRepository(db)
-    job = repo.get_job(job_id)
+    job = repo.get_job(job_id, owner_user_id=current_user.user.id)
     if job is None:
         raise HTTPException(status_code=404, detail="job not found")
     if job.status not in {JobStatus.ready}:
         raise HTTPException(status_code=409, detail=f"job status must be ready, got {job.status.value}")
-    if not repo.list_job_files(job_id):
+    if not repo.list_job_files(job_id, owner_user_id=current_user.user.id):
         raise HTTPException(status_code=400, detail="job has no uploaded files")
 
-    repo.append_event(job_id=job_id, event_type="job_queued", payload={"rule_version_id": request.rule_version_id})
+    repo.append_event(job_id=job_id, event_type="job_queued", payload={"rule_version_id": body.rule_version_id})
+    _log_job_event(
+        db=db,
+        current_user=current_user,
+        request=http_request,
+        event_type="job.started",
+        job_id=job_id,
+        payload={"rule_version_id": body.rule_version_id},
+    )
     executor = get_job_executor()
-    executor.start_job(job_id, request.rule_version_id)
-    return _job_to_response(repo, job_id)
+    executor.start_job(job_id, body.rule_version_id)
+    return _job_to_response(repo, job_id, owner_user_id=current_user.user.id)
 
 
 @router.get("/{job_id}", response_model=JobResponse)
-def get_job(job_id: str, db: Annotated[Session, Depends(get_db)]) -> JobResponse:
+def get_job(
+    job_id: str,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
+) -> JobResponse:
     repo = JobRepository(db)
-    return _job_to_response(repo, job_id)
+    return _job_to_response(repo, job_id, owner_user_id=current_user.user.id)
 
 
 @router.get("/{job_id}/result")
-def get_job_result(job_id: str, db: Annotated[Session, Depends(get_db)]):
+def get_job_result(
+    job_id: str,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
+):
     repo = JobRepository(db)
-    job = repo.get_job(job_id)
+    job = repo.get_job(job_id, owner_user_id=current_user.user.id)
     if job is None:
         raise HTTPException(status_code=404, detail="job not found")
     if not job.final_output_path:
@@ -273,7 +336,7 @@ def get_job_result(job_id: str, db: Annotated[Session, Depends(get_db)]):
                 "payload": step.payload,
                 "updated_at": step.updated_at,
             }
-            for step in repo.list_job_steps(job_id)
+            for step in repo.list_job_steps(job_id, owner_user_id=current_user.user.id)
         ],
     }
 
@@ -282,12 +345,13 @@ def get_job_result(job_id: str, db: Annotated[Session, Depends(get_db)]):
 async def stream_job_events(
     job_id: str,
     request: Request,
+    current_user: Annotated[SessionUser, Depends(get_current_user)],
     settings: Annotated[Settings, Depends(get_settings)],
     last_event_id: Annotated[str | None, Header(alias="Last-Event-ID")] = None,
 ):
     with SessionLocal() as db:
         repo = JobRepository(db)
-        if repo.get_job(job_id) is None:
+        if repo.get_job(job_id, owner_user_id=current_user.user.id) is None:
             raise HTTPException(status_code=404, detail="job not found")
 
     start_id = 0

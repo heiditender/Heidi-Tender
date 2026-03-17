@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 from .models import JobStatus, RuleSource, RuleStatus
 
@@ -92,6 +92,33 @@ class GenerateRulesRequest(BaseModel):
 
 class GenerateRulesStreamRequest(BaseModel):
     prompt: str = Field(default="", max_length=2000)
+
+
+class AuthUserResponse(BaseModel):
+    id: str
+    email: EmailStr
+    display_name: str | None = None
+    avatar_url: str | None = None
+
+
+class AuthSessionResponse(BaseModel):
+    user: AuthUserResponse
+
+
+class AuthProvidersResponse(BaseModel):
+    google: bool
+    microsoft: bool
+    magic_link: bool
+
+
+class MagicLinkRequest(BaseModel):
+    email: EmailStr
+    next_path: str | None = None
+
+
+class MagicLinkRequestResponse(BaseModel):
+    ok: bool = True
+    detail: str
 
 
 class RuleVersionResponse(BaseModel):

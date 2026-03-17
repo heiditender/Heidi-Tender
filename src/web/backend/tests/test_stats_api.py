@@ -8,9 +8,10 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
+from app.auth.dependencies import SessionUser, get_current_user
 from app.api.stats import router as stats_router
 from app.db import Base, get_db
-from app.models import Job, JobStatus
+from app.models import Job, JobStatus, User, UserSession
 
 pytest.importorskip("httpx")
 from fastapi.testclient import TestClient
@@ -31,7 +32,19 @@ def _build_client() -> tuple[TestClient, sessionmaker]:
         finally:
             db.close()
 
+    def _override_current_user() -> SessionUser:
+        user = User(id="user-200", primary_email="stats@example.com", email_verified=True)
+        session = UserSession(
+            id="sess-200",
+            user_id=user.id,
+            token_hash="hash",
+            idle_expires_at=datetime.now(timezone.utc) + timedelta(hours=1),
+            absolute_expires_at=datetime.now(timezone.utc) + timedelta(days=7),
+        )
+        return SessionUser(user=user, session=session)
+
     app.dependency_overrides[get_db] = _override_get_db
+    app.dependency_overrides[get_current_user] = _override_current_user
     return TestClient(app), testing_session
 
 

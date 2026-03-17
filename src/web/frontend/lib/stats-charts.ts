@@ -2,12 +2,50 @@ import type { EChartsOption } from "echarts";
 import type { FieldFrequencyStatRow, JobDurationStatRow, StepDurationStatRow } from "@/lib/api";
 import { formatDateTime, formatDuration } from "@/lib/view-models";
 
-const AXIS_TEXT_COLOR = "#a9c0d0";
-const LABEL_TEXT_COLOR = "#d8eaf6";
-const SPLIT_LINE_COLOR = "rgba(148, 178, 197, 0.14)";
-const GRID_LINE_COLOR = "rgba(148, 178, 197, 0.22)";
-const TOOLTIP_BG = "rgba(6, 18, 26, 0.95)";
-const TOOLTIP_BORDER = "rgba(118, 187, 223, 0.45)";
+export type ChartTheme = "light" | "dark";
+
+interface ChartThemeTokens {
+  axisTextColor: string;
+  labelTextColor: string;
+  splitLineColor: string;
+  gridLineColor: string;
+  tooltipBg: string;
+  tooltipBorder: string;
+  sliderBg: string;
+  sliderBorder: string;
+  heatmapTextColor: string;
+  heatmapBorderColor: string;
+  heatmapPalette: string[];
+}
+
+const CHART_THEME_TOKENS: Record<ChartTheme, ChartThemeTokens> = {
+  dark: {
+    axisTextColor: "#a9c0d0",
+    labelTextColor: "#d8eaf6",
+    splitLineColor: "rgba(148, 178, 197, 0.14)",
+    gridLineColor: "rgba(148, 178, 197, 0.22)",
+    tooltipBg: "rgba(6, 18, 26, 0.95)",
+    tooltipBorder: "rgba(118, 187, 223, 0.45)",
+    sliderBg: "rgba(29, 54, 68, 0.5)",
+    sliderBorder: "rgba(117, 163, 189, 0.28)",
+    heatmapTextColor: "#e6f6ff",
+    heatmapBorderColor: "rgba(155, 209, 235, 0.24)",
+    heatmapPalette: ["#0b2e42", "#134760", "#1f6f8b", "#2f95b0", "#47b7d6"],
+  },
+  light: {
+    axisTextColor: "#4c6472",
+    labelTextColor: "#163243",
+    splitLineColor: "rgba(82, 113, 132, 0.16)",
+    gridLineColor: "rgba(82, 113, 132, 0.24)",
+    tooltipBg: "rgba(250, 252, 253, 0.98)",
+    tooltipBorder: "rgba(109, 149, 172, 0.34)",
+    sliderBg: "rgba(216, 230, 238, 0.78)",
+    sliderBorder: "rgba(110, 142, 161, 0.24)",
+    heatmapTextColor: "#103245",
+    heatmapBorderColor: "rgba(84, 128, 151, 0.18)",
+    heatmapPalette: ["#d5e9f3", "#b0d8e6", "#7fbfd3", "#4796b1", "#165d76"],
+  },
+};
 
 const HEATMAP_COLS = 8;
 
@@ -26,20 +64,26 @@ function toDurationMsValue(input: number | null): number {
   return Math.max(0, input);
 }
 
-function commonTooltip() {
+function getChartTokens(theme: ChartTheme): ChartThemeTokens {
+  return CHART_THEME_TOKENS[theme];
+}
+
+function commonTooltip(theme: ChartTheme) {
+  const tokens = getChartTokens(theme);
   return {
     trigger: "item" as const,
-    backgroundColor: TOOLTIP_BG,
-    borderColor: TOOLTIP_BORDER,
+    backgroundColor: tokens.tooltipBg,
+    borderColor: tokens.tooltipBorder,
     borderWidth: 1,
     textStyle: {
-      color: LABEL_TEXT_COLOR,
+      color: tokens.labelTextColor,
       fontSize: 12,
     },
   };
 }
 
-export function buildJobDurationOption(rows: JobDurationStatRow[]): EChartsOption {
+export function buildJobDurationOption(rows: JobDurationStatRow[], theme: ChartTheme = "dark"): EChartsOption {
+  const tokens = getChartTokens(theme);
   const categories = rows.map((row) => compactJobId(row.job_id));
   const values = rows.map((row) => toDurationMsValue(row.duration_ms));
 
@@ -48,7 +92,7 @@ export function buildJobDurationOption(rows: JobDurationStatRow[]): EChartsOptio
     color: ["#38bdf8"],
     grid: { left: 156, right: 38, top: 26, bottom: 24 },
     tooltip: {
-      ...commonTooltip(),
+      ...commonTooltip(theme),
       formatter: (raw: any) => {
         const index = Number(raw?.dataIndex ?? 0);
         const row = rows[index];
@@ -64,25 +108,25 @@ export function buildJobDurationOption(rows: JobDurationStatRow[]): EChartsOptio
     xAxis: {
       type: "value",
       axisLabel: {
-        color: AXIS_TEXT_COLOR,
+        color: tokens.axisTextColor,
         formatter: (value: number) => formatDuration(value),
       },
       splitLine: {
-        lineStyle: { color: SPLIT_LINE_COLOR },
+        lineStyle: { color: tokens.splitLineColor },
       },
-      axisLine: { lineStyle: { color: GRID_LINE_COLOR } },
+      axisLine: { lineStyle: { color: tokens.gridLineColor } },
     },
     yAxis: {
       type: "category",
       data: categories,
       inverse: true,
       axisLabel: {
-        color: AXIS_TEXT_COLOR,
+        color: tokens.axisTextColor,
         width: 138,
         overflow: "truncate",
       },
       axisTick: { show: false },
-      axisLine: { lineStyle: { color: GRID_LINE_COLOR } },
+      axisLine: { lineStyle: { color: tokens.gridLineColor } },
     },
     dataZoom: [
       {
@@ -95,8 +139,8 @@ export function buildJobDurationOption(rows: JobDurationStatRow[]): EChartsOptio
         yAxisIndex: 0,
         width: 12,
         right: 10,
-        backgroundColor: "rgba(29, 54, 68, 0.5)",
-        borderColor: "rgba(117, 163, 189, 0.28)",
+        backgroundColor: tokens.sliderBg,
+        borderColor: tokens.sliderBorder,
         fillerColor: "rgba(56, 189, 248, 0.2)",
       },
     ],
@@ -113,7 +157,8 @@ export function buildJobDurationOption(rows: JobDurationStatRow[]): EChartsOptio
   };
 }
 
-export function buildExtractedProductsOption(rows: JobDurationStatRow[]): EChartsOption {
+export function buildExtractedProductsOption(rows: JobDurationStatRow[], theme: ChartTheme = "dark"): EChartsOption {
+  const tokens = getChartTokens(theme);
   const categories = rows.map((row) => compactJobId(row.job_id));
   const values = rows.map((row) => {
     if (row.extracted_products == null || Number.isNaN(row.extracted_products)) return 0;
@@ -125,7 +170,7 @@ export function buildExtractedProductsOption(rows: JobDurationStatRow[]): EChart
     color: ["#22c55e"],
     grid: { left: 156, right: 38, top: 26, bottom: 24 },
     tooltip: {
-      ...commonTooltip(),
+      ...commonTooltip(theme),
       formatter: (raw: any) => {
         const index = Number(raw?.dataIndex ?? 0);
         const row = rows[index];
@@ -140,21 +185,21 @@ export function buildExtractedProductsOption(rows: JobDurationStatRow[]): EChart
     },
     xAxis: {
       type: "value",
-      axisLabel: { color: AXIS_TEXT_COLOR },
-      splitLine: { lineStyle: { color: SPLIT_LINE_COLOR } },
-      axisLine: { lineStyle: { color: GRID_LINE_COLOR } },
+      axisLabel: { color: tokens.axisTextColor },
+      splitLine: { lineStyle: { color: tokens.splitLineColor } },
+      axisLine: { lineStyle: { color: tokens.gridLineColor } },
     },
     yAxis: {
       type: "category",
       data: categories,
       inverse: true,
       axisLabel: {
-        color: AXIS_TEXT_COLOR,
+        color: tokens.axisTextColor,
         width: 138,
         overflow: "truncate",
       },
       axisTick: { show: false },
-      axisLine: { lineStyle: { color: GRID_LINE_COLOR } },
+      axisLine: { lineStyle: { color: tokens.gridLineColor } },
     },
     dataZoom: [
       {
@@ -166,8 +211,8 @@ export function buildExtractedProductsOption(rows: JobDurationStatRow[]): EChart
         yAxisIndex: 0,
         width: 12,
         right: 10,
-        backgroundColor: "rgba(29, 54, 68, 0.5)",
-        borderColor: "rgba(117, 163, 189, 0.28)",
+        backgroundColor: tokens.sliderBg,
+        borderColor: tokens.sliderBorder,
         fillerColor: "rgba(34, 197, 94, 0.2)",
       },
     ],
@@ -184,7 +229,8 @@ export function buildExtractedProductsOption(rows: JobDurationStatRow[]): EChart
   };
 }
 
-export function buildStepDurationOption(rows: StepDurationStatRow[]): EChartsOption {
+export function buildStepDurationOption(rows: StepDurationStatRow[], theme: ChartTheme = "dark"): EChartsOption {
+  const tokens = getChartTokens(theme);
   const categories = rows.map((row) => compactText(row.step_name, 24));
   const avgSeries = rows.map((row) => toDurationMsValue(row.avg_duration_ms));
   const p50Series = rows.map((row) => toDurationMsValue(row.p50_duration_ms));
@@ -196,10 +242,10 @@ export function buildStepDurationOption(rows: StepDurationStatRow[]): EChartsOpt
     grid: { left: 44, right: 24, top: 40, bottom: 68 },
     legend: {
       top: 6,
-      textStyle: { color: AXIS_TEXT_COLOR },
+      textStyle: { color: tokens.axisTextColor },
     },
     tooltip: {
-      ...commonTooltip(),
+      ...commonTooltip(theme),
       trigger: "axis",
       axisPointer: { type: "shadow" },
       formatter: (items: any) => {
@@ -221,20 +267,20 @@ export function buildStepDurationOption(rows: StepDurationStatRow[]): EChartsOpt
       type: "category",
       data: categories,
       axisLabel: {
-        color: AXIS_TEXT_COLOR,
+        color: tokens.axisTextColor,
         rotate: 22,
       },
       axisTick: { show: false },
-      axisLine: { lineStyle: { color: GRID_LINE_COLOR } },
+      axisLine: { lineStyle: { color: tokens.gridLineColor } },
     },
     yAxis: {
       type: "value",
       axisLabel: {
-        color: AXIS_TEXT_COLOR,
+        color: tokens.axisTextColor,
         formatter: (value: number) => formatDuration(value),
       },
-      splitLine: { lineStyle: { color: SPLIT_LINE_COLOR } },
-      axisLine: { lineStyle: { color: GRID_LINE_COLOR } },
+      splitLine: { lineStyle: { color: tokens.splitLineColor } },
+      axisLine: { lineStyle: { color: tokens.gridLineColor } },
     },
     series: [
       {
@@ -262,7 +308,8 @@ export function buildStepDurationOption(rows: StepDurationStatRow[]): EChartsOpt
   };
 }
 
-export function buildFieldHeatmapOption(rows: FieldFrequencyStatRow[]): EChartsOption {
+export function buildFieldHeatmapOption(rows: FieldFrequencyStatRow[], theme: ChartTheme = "dark"): EChartsOption {
+  const tokens = getChartTokens(theme);
   const colCount = Math.min(HEATMAP_COLS, Math.max(1, rows.length));
   const rowCount = Math.max(1, Math.ceil(rows.length / colCount));
   const xAxisLabels = Array.from({ length: colCount }, (_, idx) => `C${idx + 1}`);
@@ -289,7 +336,7 @@ export function buildFieldHeatmapOption(rows: FieldFrequencyStatRow[]): EChartsO
       containLabel: false,
     },
     tooltip: {
-      ...commonTooltip(),
+      ...commonTooltip(theme),
       formatter: (raw: any) => {
         const item = raw?.data;
         if (!item) return "";
@@ -313,9 +360,9 @@ export function buildFieldHeatmapOption(rows: FieldFrequencyStatRow[]): EChartsO
       left: "center",
       bottom: 2,
       text: ["高频", "低频"],
-      textStyle: { color: AXIS_TEXT_COLOR },
+      textStyle: { color: tokens.axisTextColor },
       inRange: {
-        color: ["#0b2e42", "#134760", "#1f6f8b", "#2f95b0", "#47b7d6"],
+        color: tokens.heatmapPalette,
       },
     },
     series: [
@@ -329,12 +376,12 @@ export function buildFieldHeatmapOption(rows: FieldFrequencyStatRow[]): EChartsO
             if (!item) return "";
             return `${item.value?.[2] ?? 0}`;
           },
-          color: "#e6f6ff",
+          color: tokens.heatmapTextColor,
           fontSize: 11,
           fontWeight: 600,
         },
         itemStyle: {
-          borderColor: "rgba(155, 209, 235, 0.24)",
+          borderColor: tokens.heatmapBorderColor,
           borderWidth: 1,
           borderRadius: 4,
         },

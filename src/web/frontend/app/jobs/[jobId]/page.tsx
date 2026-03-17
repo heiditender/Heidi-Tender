@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "next/navigation";
-import { API_BASE, getJob, getJobResult, type JobResponse, type JobStepRow } from "@/lib/api";
+import { API_BASE, getJob, getJobResult, isAbsoluteApiBase, type JobResponse, type JobStepRow } from "@/lib/api";
 import {
   buildStepProgressStates,
   calculateProgressPercent,
@@ -275,7 +275,10 @@ export default function JobDetailPage() {
   useEffect(() => {
     if (!jobId) return;
 
-    const source = new EventSource(`${API_BASE}/jobs/${jobId}/events`);
+    const source = new EventSource(
+      `${API_BASE}/jobs/${jobId}/events`,
+      isAbsoluteApiBase() ? { withCredentials: true } : undefined
+    );
 
     source.onopen = () => {
       setSseConnected(true);

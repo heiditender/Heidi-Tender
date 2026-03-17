@@ -9,6 +9,7 @@ import {
   buildJobDurationOption,
   buildStepDurationOption,
 } from "@/lib/stats-charts";
+import { useTheme } from "@/lib/use-theme";
 import { formatDateTime, formatDuration, toGuidedError } from "@/lib/view-models";
 import { ActionButton, EmptyState, InlineNotice, SectionHeader, StatusBadge } from "@/components/ui";
 
@@ -48,6 +49,7 @@ function calcHeatmapHeight(cellCount: number): number {
 }
 
 export default function StatsPage() {
+  const { theme } = useTheme();
   const [days, setDays] = useState<7 | 30 | 90>(30);
   const [includeFailed, setIncludeFailed] = useState(true);
   const [topN, setTopN] = useState<20 | 40 | 60>(40);
@@ -103,10 +105,10 @@ export default function StatsPage() {
   const stepRows = dashboard?.step_durations ?? [];
   const fieldRows = dashboard?.field_frequency ?? [];
 
-  const durationOption = useMemo(() => buildJobDurationOption(durationJobs), [durationJobs]);
-  const stepOption = useMemo(() => buildStepDurationOption(stepRows), [stepRows]);
-  const productsOption = useMemo(() => buildExtractedProductsOption(extractedJobs), [extractedJobs]);
-  const heatmapOption = useMemo(() => buildFieldHeatmapOption(fieldRows), [fieldRows]);
+  const durationOption = useMemo(() => buildJobDurationOption(durationJobs, theme), [durationJobs, theme]);
+  const stepOption = useMemo(() => buildStepDurationOption(stepRows, theme), [stepRows, theme]);
+  const productsOption = useMemo(() => buildExtractedProductsOption(extractedJobs, theme), [extractedJobs, theme]);
+  const heatmapOption = useMemo(() => buildFieldHeatmapOption(fieldRows, theme), [fieldRows, theme]);
   const heatmapHeight = useMemo(() => calcHeatmapHeight(fieldRows.length), [fieldRows.length]);
 
   return (

@@ -17,19 +17,23 @@ class JobRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def create_job(self) -> Job:
-        job = Job(status=JobStatus.created)
+    def create_job(self, *, owner_user_id: str | None) -> Job:
+        job = Job(status=JobStatus.created, owner_user_id=owner_user_id)
         self.db.add(job)
         self.db.commit()
         self.db.refresh(job)
         return job
 
-    def get_job(self, job_id: str) -> Job | None:
-        return self.db.get(Job, job_id)
+    def get_job(self, job_id: str, *, owner_user_id: str | None = None) -> Job | None:
+        stmt = select(Job).where(Job.id == job_id)
+        if owner_user_id is not None:
+            stmt = stmt.where(Job.owner_user_id == owner_user_id)
+        return self.db.scalars(stmt).first()
 
     def list_jobs(
         self,
         *,
+        owner_user_id: str | None = None,
         status: JobStatus | None = None,
         query: str | None = None,
         updated_from: datetime | None = None,
@@ -38,6 +42,8 @@ class JobRepository:
         offset: int = 0,
     ) -> list[Job]:
         stmt = select(Job)
+        if owner_user_id is not None:
+            stmt = stmt.where(Job.owner_user_id == owner_user_id)
         if status is not None:
             stmt = stmt.where(Job.status == status)
         if query:
@@ -64,11 +70,17 @@ class JobRepository:
         stmt = stmt.order_by(Job.updated_at.desc())
         return list(self.db.scalars(stmt).all())
 
-    def list_job_files(self, job_id: str) -> list[JobFile]:
+    def list_job_files(self, job_id: str, *, owner_user_id: str | None = None) -> list[JobFile]:
+        if owner_user_id is not None:
+            if self.get_job(job_id, owner_user_id=owner_user_id) is None:
+                return []
         stmt = select(JobFile).where(JobFile.job_id == job_id).order_by(JobFile.created_at.asc())
         return list(self.db.scalars(stmt).all())
 
-    def list_job_steps(self, job_id: str) -> list[JobStep]:
+    def list_job_steps(self, job_id: str, *, owner_user_id: str | None = None) -> list[JobStep]:
+        if owner_user_id is not None:
+            if self.get_job(job_id, owner_user_id=owner_user_id) is None:
+                return []
         stmt = select(JobStep).where(JobStep.job_id == job_id).order_by(JobStep.updated_at.asc())
         return list(self.db.scalars(stmt).all())
 
@@ -86,8 +98,8 @@ class JobRepository:
             grouped.setdefault(row.job_id, []).append(row)
         return grouped
 
-    def count_job_files(self, job_id: str) -> int:
-        return len(self.list_job_files(job_id))
+    def count_job_files(self, job_id: str, *, owner_user_id: str | None = None) -> int:
+        return len(self.list_job_files(job_id, owner_user_id=owner_user_id))
 
     def count_job_files_bulk(self, job_ids: list[str]) -> dict[str, int]:
         if not job_ids:

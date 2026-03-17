@@ -28,22 +28,30 @@ def _compute_fingerprint(files: list[Path], root_dir: Path) -> str:
     return hasher.hexdigest()
 
 
-def _find_existing_store(stores: list[dict], *, kb_key: str, fingerprint: str) -> dict | None:
+def _vector_store_file_total(store: dict) -> int:
+    file_counts = store.get("file_counts")
+    if not isinstance(file_counts, dict):
+        return 0
+    total = file_counts.get("total")
+    if isinstance(total, int):
+        return total
+    if isinstance(total, str) and total.isdigit():
+        return int(total)
+    return 0
+
+
+def _find_existing_store(stores: list[dict], *, vector_store_name: str) -> dict | None:
     candidates: list[tuple[int, int, dict]] = []
     for store in stores:
         status = str(store.get("status") or "")
         if status == "expired":
             continue
-        metadata = store.get("metadata")
-        if not isinstance(metadata, dict):
-            continue
-        if metadata.get("kb_key") != kb_key:
-            continue
-        if metadata.get("kb_fingerprint") != fingerprint:
+        if str(store.get("name") or "") != vector_store_name:
             continue
         created_at = store.get("created_at")
         created_at_ts = int(created_at) if isinstance(created_at, int) else 0
-        candidates.append((1, created_at_ts, store))
+        has_files = 1 if _vector_store_file_total(store) > 0 else 0
+        candidates.append((has_files, created_at_ts, store))
     if not candidates:
         return None
     candidates.sort(key=lambda item: (item[0], item[1]), reverse=True)
@@ -69,7 +77,8 @@ def ensure_vector_store(
 
     fingerprint = _compute_fingerprint(non_empty_files, source_dir)
     stores = list_vector_stores(base_url, api_key)
-    existing = _find_existing_store(stores, kb_key=kb_key, fingerprint=fingerprint)
+    # Production behavior: reuse the named knowledge-base store directly.
+    existing = _find_existing_store(stores, vector_store_name=vector_store_name)
     if existing is not None:
         return {
             "kb_key": kb_key,

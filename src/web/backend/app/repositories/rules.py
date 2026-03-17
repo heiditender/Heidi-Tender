@@ -69,6 +69,7 @@ class RuleRepository:
         validation_report: dict,
         copilot_log: dict | None = None,
         note: str | None = None,
+        created_by_user_id: str | None = None,
     ) -> RuleVersion:
         row = RuleVersion(
             version_number=self.next_version_number(),
@@ -79,6 +80,7 @@ class RuleRepository:
             copilot_log=copilot_log,
             note=note,
             published_at=utc_now() if status == RuleStatus.published else None,
+            created_by_user_id=created_by_user_id,
         )
         self.db.add(row)
         self.db.commit()

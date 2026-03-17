@@ -9,12 +9,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import inspect, text
 
+from .api.auth import router as auth_router
 from .api.jobs import router as jobs_router
 from .api.rules import router as rules_router
 from .api.settings import router as settings_router
 from .api.stats import router as stats_router
 from .config import get_settings
-from .db import Base, SessionLocal, engine
+from .db import SessionLocal, engine
 from .models import RuleSource, RuleStatus
 from .repositories.app_settings import AppSettingsRepository
 from .repositories.rules import RuleRepository
@@ -26,8 +27,8 @@ app = FastAPI(title=settings.app_name)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=settings.cors_allowed_origin_list,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -38,6 +39,7 @@ def health() -> dict:
     return {"ok": True}
 
 
+app.include_router(auth_router, prefix=settings.api_prefix)
 app.include_router(jobs_router, prefix=settings.api_prefix)
 app.include_router(rules_router, prefix=settings.api_prefix)
 app.include_router(settings_router, prefix=settings.api_prefix)
@@ -110,7 +112,6 @@ def _seed_rule_if_needed() -> None:
 
 
 def _bootstrap_runtime_database_state() -> None:
-    Base.metadata.create_all(bind=engine)
     _ensure_runtime_schema_extensions()
     _ensure_runtime_indexes()
     _ensure_app_settings_defaults()

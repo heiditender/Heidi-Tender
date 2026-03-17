@@ -108,6 +108,7 @@ services:
     build:
       context: .
       dockerfile: src/web/frontend/Dockerfile
+      target: dev
     container_name: heidi-tender-web
     depends_on:
       - backend

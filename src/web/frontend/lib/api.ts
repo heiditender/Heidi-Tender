@@ -4,6 +4,28 @@ export type JobStatus = "created" | "uploading" | "ready" | "running" | "succeed
 export type RuleStatus = "draft" | "published" | "archived";
 export type RuleSource = "manual" | "llm" | "seed";
 
+export interface AuthUser {
+  id: string;
+  email: string;
+  display_name?: string | null;
+  avatar_url?: string | null;
+}
+
+export interface AuthSessionResponse {
+  user: AuthUser;
+}
+
+export interface AuthProvidersResponse {
+  google: boolean;
+  microsoft: boolean;
+  magic_link: boolean;
+}
+
+export interface MagicLinkRequestResponse {
+  ok: boolean;
+  detail: string;
+}
+
 export interface JobFileRow {
   id: string;
   relative_path: string;
@@ -160,16 +182,77 @@ export interface StatsDashboardResponse {
   field_frequency: FieldFrequencyStatRow[];
 }
 
+export class UnauthorizedError extends Error {
+  constructor(message = "Authentication required") {
+    super(message);
+    this.name = "UnauthorizedError";
+  }
+}
+
+function emitAuthRequired() {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("heidi:auth-required"));
+}
+
+async function apiFetch(input: string, init: RequestInit = {}): Promise<Response> {
+  return fetch(input, {
+    credentials: "include",
+    ...init,
+  });
+}
+
 async function ensureOk<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const message = await response.text();
+    if (response.status === 401) {
+      emitAuthRequired();
+      throw new UnauthorizedError(message || "Authentication required");
+    }
     throw new Error(message || `HTTP ${response.status}`);
   }
   return (await response.json()) as T;
 }
 
+export function buildAuthLoginUrl(provider: "google" | "microsoft", nextPath?: string): string {
+  const params = new URLSearchParams();
+  if (nextPath) params.set("next_path", nextPath);
+  const suffix = params.size ? `?${params.toString()}` : "";
+  return `${API_BASE}/auth/login/${provider}${suffix}`;
+}
+
+export function isAbsoluteApiBase(): boolean {
+  return API_BASE.startsWith("http://") || API_BASE.startsWith("https://");
+}
+
+export async function getAuthSession(): Promise<AuthSessionResponse> {
+  const response = await apiFetch(`${API_BASE}/auth/session`, { cache: "no-store" });
+  return ensureOk(response);
+}
+
+export async function getAuthOptions(): Promise<AuthProvidersResponse> {
+  const response = await apiFetch(`${API_BASE}/auth/options`, { cache: "no-store" });
+  return ensureOk(response);
+}
+
+export async function logout(): Promise<void> {
+  const response = await apiFetch(`${API_BASE}/auth/logout`, { method: "POST" });
+  if (!response.ok && response.status !== 401) {
+    const message = await response.text();
+    throw new Error(message || `HTTP ${response.status}`);
+  }
+}
+
+export async function requestMagicLink(email: string, nextPath?: string): Promise<MagicLinkRequestResponse> {
+  const response = await apiFetch(`${API_BASE}/auth/magic-link/request`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, next_path: nextPath ?? null }),
+  });
+  return ensureOk(response);
+}
+
 export async function createJob(): Promise<{ id: string; status: JobStatus; created_at: string }> {
-  const response = await fetch(`${API_BASE}/jobs`, { method: "POST" });
+  const response = await apiFetch(`${API_BASE}/jobs`, { method: "POST" });
   return ensureOk(response);
 }
 
@@ -177,28 +260,28 @@ export async function uploadJobFile(jobId: string, file: File, relativePath: str
   const form = new FormData();
   form.append("file", file);
   form.append("relative_path", relativePath);
-  const response = await fetch(`${API_BASE}/jobs/${jobId}/file`, { method: "POST", body: form });
+  const response = await apiFetch(`${API_BASE}/jobs/${jobId}/file`, { method: "POST", body: form });
   return ensureOk(response);
 }
 
 export async function uploadJobArchive(jobId: string, file: File): Promise<JobResponse> {
   const form = new FormData();
   form.append("file", file);
-  const response = await fetch(`${API_BASE}/jobs/${jobId}/archive`, { method: "POST", body: form });
+  const response = await apiFetch(`${API_BASE}/jobs/${jobId}/archive`, { method: "POST", body: form });
   return ensureOk(response);
 }
 
 export async function startJob(jobId: string, ruleVersionId?: string): Promise<JobResponse> {
-  const response = await fetch(`${API_BASE}/jobs/${jobId}/start`, {
+  const response = await apiFetch(`${API_BASE}/jobs/${jobId}/start`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ rule_version_id: ruleVersionId ?? null })
+    body: JSON.stringify({ rule_version_id: ruleVersionId ?? null }),
   });
   return ensureOk(response);
 }
 
 export async function getJob(jobId: string): Promise<JobResponse> {
-  const response = await fetch(`${API_BASE}/jobs/${jobId}`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/jobs/${jobId}`, { cache: "no-store" });
   return ensureOk(response);
 }
 
@@ -211,12 +294,12 @@ export async function listJobs(query: JobListQuery = {}): Promise<JobResponse[]>
   if (query.updated_from) params.set("updated_from", query.updated_from);
   if (query.updated_to) params.set("updated_to", query.updated_to);
   const suffix = params.size ? `?${params.toString()}` : "";
-  const response = await fetch(`${API_BASE}/jobs${suffix}`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/jobs${suffix}`, { cache: "no-store" });
   return ensureOk(response);
 }
 
 export async function getJobResult(jobId: string): Promise<Record<string, unknown>> {
-  const response = await fetch(`${API_BASE}/jobs/${jobId}/result`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/jobs/${jobId}/result`, { cache: "no-store" });
   return ensureOk(response);
 }
 
@@ -228,12 +311,12 @@ export async function getRuleVersions(query: RuleVersionListQuery = {}): Promise
   if (query.source) params.set("source", query.source);
   if (query.q) params.set("q", query.q);
   const suffix = params.size ? `?${params.toString()}` : "";
-  const response = await fetch(`${API_BASE}/rules/versions${suffix}`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/rules/versions${suffix}`, { cache: "no-store" });
   return ensureOk(response);
 }
 
 export async function getCurrentRule(): Promise<RuleVersion> {
-  const response = await fetch(`${API_BASE}/rules/current`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/rules/current`, { cache: "no-store" });
   return ensureOk(response);
 }
 
@@ -243,38 +326,38 @@ export async function saveRuleDraft(
   source: RuleSource = "manual",
   copilotLog?: CopilotLogPayload
 ): Promise<RuleVersion> {
-  const response = await fetch(`${API_BASE}/rules/draft`, {
+  const response = await apiFetch(`${API_BASE}/rules/draft`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ payload, note, source, copilot_log: copilotLog ?? null })
+    body: JSON.stringify({ payload, note, source, copilot_log: copilotLog ?? null }),
   });
   return ensureOk(response);
 }
 
 export async function generateRuleDraft(note?: string): Promise<RuleVersion> {
-  const response = await fetch(`${API_BASE}/rules/generate`, {
+  const response = await apiFetch(`${API_BASE}/rules/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ note })
+    body: JSON.stringify({ note }),
   });
   return ensureOk(response);
 }
 
 export async function publishRuleVersion(versionId: string): Promise<{ id: string; status: string; published_at: string }> {
-  const response = await fetch(`${API_BASE}/rules/${versionId}/publish`, { method: "POST" });
+  const response = await apiFetch(`${API_BASE}/rules/${versionId}/publish`, { method: "POST" });
   return ensureOk(response);
 }
 
 export async function getModelSettings(): Promise<ModelSettingsResponse> {
-  const response = await fetch(`${API_BASE}/settings/model`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/settings/model`, { cache: "no-store" });
   return ensureOk(response);
 }
 
 export async function setModelSettings(model: "gpt-5.4" | "gpt-5-mini"): Promise<ModelSettingsResponse> {
-  const response = await fetch(`${API_BASE}/settings/model`, {
+  const response = await apiFetch(`${API_BASE}/settings/model`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model })
+    body: JSON.stringify({ model }),
   });
   return ensureOk(response);
 }
@@ -283,13 +366,17 @@ export async function streamRuleDraftPreview(
   prompt: string,
   onEvent: (event: RuleGenerateStreamEvent) => void
 ): Promise<void> {
-  const response = await fetch(`${API_BASE}/rules/generate/stream`, {
+  const response = await apiFetch(`${API_BASE}/rules/generate/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt })
+    body: JSON.stringify({ prompt }),
   });
   if (!response.ok) {
     const message = await response.text();
+    if (response.status === 401) {
+      emitAuthRequired();
+      throw new UnauthorizedError(message || "Authentication required");
+    }
     throw new Error(message || `HTTP ${response.status}`);
   }
   if (!response.body) {
@@ -361,6 +448,6 @@ export async function getStatsDashboard(query: StatsDashboardQuery = {}): Promis
   if (typeof query.include_failed === "boolean") params.set("include_failed", String(query.include_failed));
   if (typeof query.top_n === "number") params.set("top_n", String(query.top_n));
   const suffix = params.size ? `?${params.toString()}` : "";
-  const response = await fetch(`${API_BASE}/stats/dashboard${suffix}`, { cache: "no-store" });
+  const response = await apiFetch(`${API_BASE}/stats/dashboard${suffix}`, { cache: "no-store" });
   return ensureOk(response);
 }

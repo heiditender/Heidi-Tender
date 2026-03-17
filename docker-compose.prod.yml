@@ -1,0 +1,172 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: heidi-tender-mysql-prod
+    command: ["mysqld", "--max_allowed_packet=512M"]
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${PIM_MYSQL_DB:?set PIM_MYSQL_DB}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  mysql-init:
+    image: mysql:8.4
+    container_name: heidi-tender-mysql-init-prod
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      PIM_MYSQL_HOST: mysql
+      PIM_MYSQL_PORT: ${PIM_MYSQL_PORT:-3306}
+      PIM_MYSQL_USER: ${PIM_MYSQL_USER:?set PIM_MYSQL_USER}
+      PIM_MYSQL_PASSWORD: ${PIM_MYSQL_PASSWORD:?set PIM_MYSQL_PASSWORD}
+      PIM_MYSQL_DB: ${PIM_MYSQL_DB:?set PIM_MYSQL_DB}
+      PIM_SQL_FILE: /prepare/pim.sql
+      PIM_CHECK_TABLE: ${PIM_CHECK_TABLE:-articles}
+      FORCE_REBUILD: ${FORCE_REBUILD:-0}
+    volumes:
+      - ./src/prepare:/prepare:ro
+      - ./scripts:/scripts:ro
+    entrypoint: ["sh", "/scripts/rebuild_pim_mysql.sh"]
+    restart: "no"
+
+  mysql-views-init:
+    image: mysql:8.4
+    container_name: heidi-tender-mysql-views-init-prod
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mysql-init:
+        condition: service_completed_successfully
+    environment:
+      PIM_MYSQL_HOST: mysql
+      PIM_MYSQL_PORT: ${PIM_MYSQL_PORT:-3306}
+      PIM_MYSQL_USER: ${PIM_MYSQL_USER:?set PIM_MYSQL_USER}
+      PIM_MYSQL_PASSWORD: ${PIM_MYSQL_PASSWORD:?set PIM_MYSQL_PASSWORD}
+      PIM_MYSQL_DB: ${PIM_MYSQL_DB:?set PIM_MYSQL_DB}
+    volumes:
+      - ./scripts:/scripts:ro
+    entrypoint: ["sh", "/scripts/init_bid_views.sh"]
+    restart: "no"
+
+  postgres:
+    image: postgres:16
+    container_name: heidi-tender-postgres-prod
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?set POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: src/web/backend/Dockerfile
+    container_name: heidi-tender-backend-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+      mysql-init:
+        condition: service_completed_successfully
+      mysql-views-init:
+        condition: service_completed_successfully
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL}
+      PIM_MYSQL_HOST: mysql
+      PIM_MYSQL_PORT: ${PIM_MYSQL_PORT:-3306}
+      PIM_MYSQL_USER: ${PIM_MYSQL_USER:?set PIM_MYSQL_USER}
+      PIM_MYSQL_PASSWORD: ${PIM_MYSQL_PASSWORD:?set PIM_MYSQL_PASSWORD}
+      PIM_MYSQL_DB: ${PIM_MYSQL_DB:?set PIM_MYSQL_DB}
+      PIM_SCHEMA_TABLES: ${PIM_SCHEMA_TABLES:-vw_bid_products,vw_bid_specs}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?set OPENAI_API_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5-mini}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      CORE_SKIP_KB_BOOTSTRAP: ${CORE_SKIP_KB_BOOTSTRAP:-false}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-https://heiditender.ch,https://www.heiditender.ch}
+      AUTH_SESSION_SECRET: ${AUTH_SESSION_SECRET:-change-me}
+      AUTH_PUBLIC_BASE_URL: ${AUTH_PUBLIC_BASE_URL:-https://heiditender.ch}
+      AUTH_FRONTEND_BASE_URL: ${AUTH_FRONTEND_BASE_URL:-https://heiditender.ch}
+      AUTH_GOOGLE_CLIENT_ID: ${AUTH_GOOGLE_CLIENT_ID:-}
+      AUTH_GOOGLE_CLIENT_SECRET: ${AUTH_GOOGLE_CLIENT_SECRET:-}
+      AUTH_GOOGLE_REDIRECT_URI: ${AUTH_GOOGLE_REDIRECT_URI:-}
+      AUTH_MICROSOFT_CLIENT_ID: ${AUTH_MICROSOFT_CLIENT_ID:-}
+      AUTH_MICROSOFT_CLIENT_SECRET: ${AUTH_MICROSOFT_CLIENT_SECRET:-}
+      AUTH_MICROSOFT_REDIRECT_URI: ${AUTH_MICROSOFT_REDIRECT_URI:-}
+      AUTH_MAGIC_LINK_SENDER_EMAIL: ${AUTH_MAGIC_LINK_SENDER_EMAIL:-}
+      AUTH_RESEND_API_KEY: ${AUTH_RESEND_API_KEY:-}
+      AUTH_MAGIC_LINK_BASE_URL: ${AUTH_MAGIC_LINK_BASE_URL:-}
+      AUTH_MAGIC_LINK_SUBJECT: ${AUTH_MAGIC_LINK_SUBJECT:-Your Heidi Tender sign-in link}
+      AUTH_SESSION_IDLE_TIMEOUT_SECONDS: ${AUTH_SESSION_IDLE_TIMEOUT_SECONDS:-86400}
+      AUTH_SESSION_ABSOLUTE_TIMEOUT_SECONDS: ${AUTH_SESSION_ABSOLUTE_TIMEOUT_SECONDS:-1209600}
+      AUTH_MAGIC_LINK_TTL_SECONDS: ${AUTH_MAGIC_LINK_TTL_SECONDS:-900}
+      AUTH_MAGIC_LINK_REQUESTS_PER_EMAIL_WINDOW: ${AUTH_MAGIC_LINK_REQUESTS_PER_EMAIL_WINDOW:-5}
+      AUTH_MAGIC_LINK_REQUESTS_PER_IP_WINDOW: ${AUTH_MAGIC_LINK_REQUESTS_PER_IP_WINDOW:-10}
+      AUTH_RATE_LIMIT_WINDOW_SECONDS: ${AUTH_RATE_LIMIT_WINDOW_SECONDS:-900}
+    volumes:
+      - ./data/jobs:/app/src/web/backend/data/jobs
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: src/web/frontend/Dockerfile
+      target: prod
+      args:
+        NEXT_PUBLIC_API_BASE: ${NEXT_PUBLIC_API_BASE:-/api/v1}
+    container_name: heidi-tender-frontend-prod
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: heidi-tender-certbot-prod
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?set APP_DOMAIN}
+      APP_WWW_DOMAIN: ${APP_WWW_DOMAIN:-}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:?set LETSENCRYPT_EMAIL}
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["trap exit TERM; while :; do sleep 43200 & wait $$!; done"]
+    volumes:
+      - ./data/certbot/www:/var/www/certbot
+      - ./data/letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: .
+      dockerfile: deploy/nginx/Dockerfile
+    container_name: heidi-tender-nginx-prod
+    depends_on:
+      - frontend
+      - backend
+      - certbot
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?set APP_DOMAIN}
+      APP_WWW_DOMAIN: ${APP_WWW_DOMAIN:-}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./data/certbot/www:/var/www/certbot
+      - ./data/letsencrypt:/etc/letsencrypt:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    name: heidi-tender-prod
