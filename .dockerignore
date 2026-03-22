@@ -11,6 +11,7 @@ build/
 dist/
 runtime/
 data/
+incident-response/
 
 src/web/frontend/node_modules/
 src/web/frontend/.next/

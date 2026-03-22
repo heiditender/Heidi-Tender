@@ -1,3 +1,13 @@
+x-app-hardening: &app_hardening
+  init: true
+  read_only: true
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  tmpfs:
+    - /tmp:size=64m,mode=1777
+
 services:
   mysql:
     image: mysql:8.4
@@ -72,6 +82,7 @@ services:
     restart: unless-stopped
 
   backend:
+    <<: *app_hardening
     build:
       context: .
       dockerfile: src/web/backend/Dockerfile
@@ -98,7 +109,7 @@ services:
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com/v1}
       CORE_SKIP_KB_BOOTSTRAP: ${CORE_SKIP_KB_BOOTSTRAP:-false}
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-https://heiditender.ch,https://www.heiditender.ch}
-      AUTH_SESSION_SECRET: ${AUTH_SESSION_SECRET:-change-me}
+      AUTH_SESSION_SECRET: ${AUTH_SESSION_SECRET:?set AUTH_SESSION_SECRET}
       AUTH_PUBLIC_BASE_URL: ${AUTH_PUBLIC_BASE_URL:-https://heiditender.ch}
       AUTH_FRONTEND_BASE_URL: ${AUTH_FRONTEND_BASE_URL:-https://heiditender.ch}
       AUTH_GOOGLE_CLIENT_ID: ${AUTH_GOOGLE_CLIENT_ID:-}
@@ -117,11 +128,13 @@ services:
       AUTH_MAGIC_LINK_REQUESTS_PER_EMAIL_WINDOW: ${AUTH_MAGIC_LINK_REQUESTS_PER_EMAIL_WINDOW:-5}
       AUTH_MAGIC_LINK_REQUESTS_PER_IP_WINDOW: ${AUTH_MAGIC_LINK_REQUESTS_PER_IP_WINDOW:-10}
       AUTH_RATE_LIMIT_WINDOW_SECONDS: ${AUTH_RATE_LIMIT_WINDOW_SECONDS:-900}
+      UVICORN_FORWARDED_ALLOW_IPS: ${UVICORN_FORWARDED_ALLOW_IPS:-172.30.0.0/24,127.0.0.1}
     volumes:
       - ./data/jobs:/app/src/web/backend/data/jobs
     restart: unless-stopped
 
   frontend:
+    <<: *app_hardening
     build:
       context: .
       dockerfile: src/web/frontend/Dockerfile
@@ -148,6 +161,7 @@ services:
     restart: unless-stopped
 
   nginx:
+    init: true
     build:
       context: .
       dockerfile: deploy/nginx/Dockerfile
@@ -159,14 +173,24 @@ services:
     environment:
       APP_DOMAIN: ${APP_DOMAIN:?set APP_DOMAIN}
       APP_WWW_DOMAIN: ${APP_WWW_DOMAIN:-}
+      NGINX_TLS_CERT_PATH: ${NGINX_TLS_CERT_PATH:-}
+      NGINX_TLS_KEY_PATH: ${NGINX_TLS_KEY_PATH:-}
+      NGINX_TRUSTED_PROXY_FILE: ${NGINX_TRUSTED_PROXY_FILE:-/etc/nginx/security/trusted-proxies.conf}
+      NGINX_ORIGIN_ALLOWLIST_FILE: ${NGINX_ORIGIN_ALLOWLIST_FILE:-/etc/nginx/security/origin-allowlist.conf}
+      NGINX_ORIGIN_LOCKDOWN_ENABLED: ${NGINX_ORIGIN_LOCKDOWN_ENABLED:-false}
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./data/certbot/www:/var/www/certbot
       - ./data/letsencrypt:/etc/letsencrypt:ro
+      - ./data/nginx/security:/etc/nginx/security:ro
+      - ./data/nginx/origin-certs:/etc/nginx/origin-certs:ro
     restart: unless-stopped
 
 networks:
   default:
     name: heidi-tender-prod
+    ipam:
+      config:
+        - subnet: ${HEIDI_INTERNAL_SUBNET:-172.30.0.0/24}

@@ -216,6 +216,7 @@ __marimo__/
 /data/postgres/
 /data/mysql/
 /data/jobs/
+/data/nginx/
 /data/certbot/
 /data/letsencrypt/
 src/web/backend/data/
@@ -234,3 +235,4 @@ src/web/frontend/.next_host_stale_*/
 # SwissTender Copilot runtime outputs
 runtime/
 data/profile.json
+incident-response/

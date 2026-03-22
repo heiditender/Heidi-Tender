@@ -1,6 +1,6 @@
 # Heidi Tender Production Deployment
 
-This guide deploys Heidi Tender to a single Ubuntu host with Docker Compose, MySQL, PostgreSQL, Nginx, and Let's Encrypt.
+This guide deploys Heidi Tender to a single Ubuntu host with Docker Compose, MySQL, PostgreSQL, Nginx, and optional Cloudflare edge protection. For incident-recovery steps and forced session invalidation, see `docs/security-recovery.md`.
 
 ## Prerequisites
 
@@ -15,8 +15,9 @@ This guide deploys Heidi Tender to a single Ubuntu host with Docker Compose, MyS
 
 ```bash
 cp .env.prod.example .env.prod
-mkdir -p data/mysql data/postgres data/jobs data/letsencrypt
+mkdir -p data/mysql data/postgres data/letsencrypt
 install -d -m 755 data/certbot data/certbot/www data/certbot/www/.well-known data/certbot/www/.well-known/acme-challenge
+bash scripts/security/prepare-host-security.sh
 ```
 
 Edit `.env.prod` and set:
@@ -32,6 +33,13 @@ Edit `.env.prod` and set:
 - `AUTH_FRONTEND_BASE_URL=https://heiditender.ch`
 - `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`
 - `AUTH_MICROSOFT_CLIENT_ID`, `AUTH_MICROSOFT_CLIENT_SECRET`
+- `UVICORN_FORWARDED_ALLOW_IPS` to the internal Docker subnet you trust
+
+Before the first build, validate that no production secret still uses a placeholder:
+
+```bash
+bash scripts/security/validate-prod-env.sh
+```
 
 Optional only if you want email magic-link login:
 
@@ -68,14 +76,32 @@ If you enable magic-link emails with Resend, set:
 - `AUTH_MAGIC_LINK_BASE_URL=https://heiditender.ch`
 - `AUTH_MAGIC_LINK_SUBJECT` if you want a custom email subject
 
+### Optional: Cloudflare origin lockdown
+
+If you are placing the origin behind Cloudflare, generate the trusted proxy and origin allowlist files before you start Nginx:
+
+```bash
+bash scripts/security/update-cloudflare-nginx-allowlists.sh
+```
+
+Then set the following in `.env.prod`:
+
+- `NGINX_ORIGIN_LOCKDOWN_ENABLED=true`
+- `NGINX_TRUSTED_PROXY_FILE=/etc/nginx/security/trusted-proxies.conf`
+- `NGINX_ORIGIN_ALLOWLIST_FILE=/etc/nginx/security/origin-allowlist.conf`
+- `NGINX_TLS_CERT_PATH` and `NGINX_TLS_KEY_PATH` to your origin certificate files
+
+If you still rely on Let's Encrypt HTTP-01 on the origin, keep `NGINX_ORIGIN_LOCKDOWN_ENABLED=false` until you move to an origin certificate or DNS-based validation.
+
 ## 2. Build and start the production stack
 
 ```bash
-docker compose --env-file .env.prod -f docker-compose.prod.yml build
+docker compose --env-file .env.prod -f docker-compose.prod.yml build --no-cache frontend backend nginx
 docker compose --env-file .env.prod -f docker-compose.prod.yml up -d
+bash scripts/security/apply-docker-egress-policy.sh
 ```
 
-First boot uses an HTTP-only Nginx config so the site can start before a certificate exists.
+First boot uses an HTTP-only Nginx config so the site can start before a certificate exists, unless you already provided `NGINX_TLS_CERT_PATH` and `NGINX_TLS_KEY_PATH`.
 
 ## 3. Issue the first Let's Encrypt certificate
 
@@ -101,7 +127,7 @@ At this point:
 - Health check should be available at `https://heiditender.ch/health`
 - Login page should be available at `https://heiditender.ch/login`
 
-## 4. Install the renewal timer
+## 4. Install the renewal timer and Cloudflare allowlist refresh
 
 Copy the example environment file and systemd units:
 
@@ -109,6 +135,8 @@ Copy the example environment file and systemd units:
 sudo cp deploy/systemd/heidi-tender-prod.env.example /etc/default/heidi-tender-prod
 sudo cp deploy/systemd/heidi-tender-certbot-renew.service /etc/systemd/system/
 sudo cp deploy/systemd/heidi-tender-certbot-renew.timer /etc/systemd/system/
+sudo cp deploy/systemd/heidi-tender-cloudflare-allowlist.service /etc/systemd/system/
+sudo cp deploy/systemd/heidi-tender-cloudflare-allowlist.timer /etc/systemd/system/
 ```
 
 Edit `/etc/default/heidi-tender-prod` and set `PROJECT_DIR` to the checkout path on the host. Leave `COMPOSE_ENV_FILE=.env.prod` and `COMPOSE_FILE=docker-compose.prod.yml` unless you renamed them.
@@ -118,6 +146,7 @@ Enable the timer:
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable --now heidi-tender-certbot-renew.timer
+sudo systemctl enable --now heidi-tender-cloudflare-allowlist.timer
 ```
 
 Manual renewal test:
@@ -125,6 +154,8 @@ Manual renewal test:
 ```bash
 sudo systemctl start heidi-tender-certbot-renew.service
 sudo systemctl status heidi-tender-certbot-renew.service --no-pager
+sudo systemctl start heidi-tender-cloudflare-allowlist.service
+sudo systemctl status heidi-tender-cloudflare-allowlist.service --no-pager
 ```
 
 ## 5. Smoke test the application
@@ -135,6 +166,7 @@ sudo systemctl status heidi-tender-certbot-renew.service --no-pager
 - Create a job, upload a file or archive, and start the pipeline
 - Confirm the job event stream updates in the UI while the run is executing
 - Restart `nginx`, `frontend`, and `backend` containers and confirm existing jobs still appear
+- Run `bash scripts/security/revoke-all-sessions.sh` after any secret rotation or compromise recovery
 
 ## Rollback
 
@@ -161,6 +193,8 @@ Persistent state is stored under:
 
 - If Nginx serves HTTP only after certificate issuance, rerun `render-nginx-config.sh` inside the `nginx` container and reload Nginx.
 - If Certbot validation fails, confirm both `heiditender.ch` and `www.heiditender.ch` resolve to `135.181.149.82`, that port `80` is reachable from the internet, and that `data/certbot/www` is world-readable so Nginx can serve the ACME challenge files.
+- If the frontend or backend fails to start with a read-only filesystem, confirm `bash scripts/security/prepare-host-security.sh` was run and that `data/jobs` is owned by UID/GID `10001`.
+- If direct origin traffic should be blocked, confirm `bash scripts/security/update-cloudflare-nginx-allowlists.sh` was run and `NGINX_ORIGIN_LOCKDOWN_ENABLED=true`.
 - If the backend fails on startup, verify both databases are healthy and that `src/prepare/pim.sql` is present on disk.
 - If the first pipeline run fails in Step1, confirm `src/prepare/upload_corpus_kb/` exists or temporarily set `CORE_SKIP_KB_BOOTSTRAP=true`.
 - If Google or Microsoft login fails, confirm the provider redirect URI matches the canonical host `https://heiditender.ch` exactly and that your provider secrets are present in `.env.prod`.

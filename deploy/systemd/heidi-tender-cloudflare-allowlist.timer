@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh Heidi Tender Cloudflare allowlists weekly
+
+[Timer]
+OnCalendar=Sun *-*-* 04:00:00
+RandomizedDelaySec=30m
+Persistent=true
+Unit=heidi-tender-cloudflare-allowlist.service
+
+[Install]
+WantedBy=timers.target
