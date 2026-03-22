@@ -53,6 +53,30 @@ def get_redirect_uri(provider: str, settings: Settings) -> str:
     raise OIDCError(f"unsupported provider: {provider}")
 
 
+def _validate_issuer_claim(*, provider: str, payload: dict[str, Any], metadata_issuer: str) -> None:
+    issuer = str(payload.get("iss") or "").strip()
+    if not issuer:
+        raise OIDCError(f"{provider} id_token issuer is missing")
+
+    if provider == "microsoft" and "{tenantid}" in metadata_issuer:
+        prefix, suffix = metadata_issuer.split("{tenantid}", 1)
+        if not issuer.startswith(prefix) or (suffix and not issuer.endswith(suffix)):
+            raise OIDCError(f"{provider} id_token issuer mismatch")
+        tenant_id = issuer[len(prefix):]
+        if suffix:
+            tenant_id = tenant_id[: -len(suffix)]
+        tenant_id = tenant_id.strip()
+        if not tenant_id:
+            raise OIDCError(f"{provider} id_token issuer is missing tenant id")
+        token_tenant_id = str(payload.get("tid") or "").strip()
+        if token_tenant_id and token_tenant_id.casefold() != tenant_id.casefold():
+            raise OIDCError(f"{provider} id_token tenant mismatch")
+        return
+
+    if issuer != metadata_issuer:
+        raise OIDCError(f"{provider} id_token issuer mismatch")
+
+
 def build_authorize_url(
     *,
     provider: str,
@@ -115,20 +139,24 @@ def validate_id_token(
 ) -> dict[str, Any]:
     discovery_url, client_id, _ = _provider_settings(provider, settings)
     metadata = get_provider_metadata(discovery_url, settings.auth_http_timeout_seconds)
-    jwk_client = jwt.PyJWKClient(metadata["jwks_uri"])
-    signing_key = jwk_client.get_signing_key_from_jwt(id_token)
-    payload = jwt.decode(
-        id_token,
-        signing_key.key,
-        algorithms=["RS256"],
-        audience=client_id,
-        issuer=metadata["issuer"],
-        options={"require": ["exp", "iat", "iss", "aud"]},
-    )
+    try:
+        jwk_client = jwt.PyJWKClient(metadata["jwks_uri"])
+        signing_key = jwk_client.get_signing_key_from_jwt(id_token)
+        payload = jwt.decode(
+            id_token,
+            signing_key.key,
+            algorithms=["RS256"],
+            audience=client_id,
+            options={"require": ["exp", "iat", "iss", "aud"], "verify_iss": False},
+        )
+    except jwt.PyJWTError as exc:
+        raise OIDCError(f"{provider} id_token validation failed: {exc}") from exc
+
     if payload.get("nonce") != nonce:
         raise OIDCError(f"{provider} id_token nonce mismatch")
     if not isinstance(payload, dict):
         raise OIDCError(f"{provider} id_token claims are invalid")
+    _validate_issuer_claim(provider=provider, payload=payload, metadata_issuer=str(metadata["issuer"]))
     return payload
 
 

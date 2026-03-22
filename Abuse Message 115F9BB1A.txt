@@ -1,0 +1,84 @@
+This is an automated abuse complaint regarding suspection of device infection
+within your network behind IP address 135.181.149.82
+---
+
+Our isolated systems has received multiple unsolicited incoming connections
+from an IP address under your control (abuse-mailbox as per RIR database). All
+unsolicited connections reported below have completed three-way handshake
+procedure defined per Transmission Control Protocol (TCP). This ensures that
+our evidence was not tampered upon any external party posessing a source IP
+address spoofing capability, because three-way handshake procedure requires
+both receiving (device within our network) and sending (device within your
+network) parties to receive reply of another party to complete handshake.
+
+The aforementioned isolated systems within our network are hosted at unused IP
+address space and are implemented as a TCP listener, so that we can be sure our
+evidence actually covering "unsolicited" and "not spoofed" activity.
+
+The activity we are reporting is often referred to as "service probing" or
+"banner grabbing". Unlike typical "port scan" type of abuse complaints you
+might receive, our complaints are not induced by a single or multiple TCP
+packets with SYN flag set. Instead, as was mentioned previously, three-way
+handshake procedure is required. To eliminate possible false-positive alerts
+caused by human typo, abuse complaint is generated only upon having four (4)
+distinct successful connections as per (Source IP; Destination IP; Destination
+Port) tuple.
+
+To minimize "Internet background noise" our network observes, the reported IP
+address was temporarily banned. Do not worry, it will be unblocked
+automatically soon. If it is the first report for this IP address within 90
+days, block lasts 24 hours. Each following report within this timeframe extends
+blocking duration for 24 hours.
+
+As for implications for your network, we suspect that device within your
+network is infected with a malware. However, sometimes there are another
+reasons, namely:
+
+- device hosts publicly accessible proxy or VPN (either intentionally, due to
+  software misconfiguration or due to usage of "proxyware" type of software);
+- device is infected with a malware (for example, networking worm, most frequently
+  this happens with IoT and DVR/IP cameras);
+- device (for example, server) is used by an malicious actor for exploitation
+  purposes (see "unethical hacking");
+- device is used by a legitimate Internet security researchers team that can be
+  clearly attributed using Forward-confirmed reverse DNS (FCrDNS).
+
+Given exact reason in this situation, you would like either to communicate with
+your client to address this issue as per Terms of Service of your organization
+or notify us of legitimate nature of this activity. When it comes to legitimate
+security researchers, we are always co-operating to whitelist your networks as
+long as FCrDNS is valid.
+
+Please note that we are providing hosting services, hence you are strongly
+discouraged from blocking any of the destination IP addresses mentioned below.
+
+If these complaints are considered irrelevant by your team for any reason, do
+not hesitate to let us know by replying to this letter. We will exclude your
+abuse-mailbox from receiving these abuse complaints in the future.
+
+Incident details are attached below. Please note that due to some automated
+abuse complaint processing systems parsing destination IP addresses as ones
+involved to this report, we are redacting destination IP addresses replacing
+all "." and ":" characters with "x".
+
+```
+Timestamp                SrcIP          SrcPort DstIP          DstPort
+2026-03-18T18:48:25.511Z 135.181.149.82 41688   45x154x199x250 80     
+2026-03-18T18:48:25.556Z 135.181.149.82 35050   45x154x199x250 443    
+2026-03-18T20:25:36.392Z 135.181.149.82 52742   144x79x58x90   80     
+2026-03-18T23:08:32.731Z 135.181.149.82 43104   88x218x206x24  80     
+----------------------------------------------------------------------
+```
+
+As was mentioned previously, the table above lists all unsolicited TCP
+connections that have completed three-way handshake. This prevents us from
+producing false-positive alerts. It is worth to note that we aren't closing the
+connection immediately after three-way handshake was completed, thus you should
+see communication from your sFlow monitoring. If you are using NetFlow or
+IPFIX, you should be able to see all four (4) flows. If you don't implement any
+of those, do not hesitate to ask us for more detailed logs.
+
+Kind regards,
+Network department
+Skhron
+

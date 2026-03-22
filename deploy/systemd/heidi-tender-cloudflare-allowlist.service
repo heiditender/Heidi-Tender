@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh Heidi Tender Cloudflare allowlists
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/default/heidi-tender-prod
+ExecStart=/bin/sh -lc 'cd "$PROJECT_DIR" && /bin/bash scripts/security/update-cloudflare-nginx-allowlists.sh'
+ExecStartPost=/bin/sh -lc 'cd "$PROJECT_DIR" && /usr/bin/docker compose --env-file "$COMPOSE_ENV_FILE" -f "$COMPOSE_FILE" exec -T nginx /usr/local/bin/render-nginx-config.sh && /usr/bin/docker compose --env-file "$COMPOSE_ENV_FILE" -f "$COMPOSE_FILE" exec -T nginx nginx -s reload'
